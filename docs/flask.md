@@ -41,3 +41,14 @@ if __name__ == "__main__":
 </html>
 
 ```
+## Añadimos hojas de estilo
+- Bootstrap 5
+- style.css
+Dentro de etiqueta `<head>` del `index.html`:
+```html
+    <!-- Hoja de Bootstrap 5 -->
+    <link rel="stylesheet"  type="text/css" href="{{url_for('.static', filename='bootstrap.min.css')}}">
+    <!-- Hojas de estilo -->
+    <link rel="stylesheet"  type="text/css" href="{{url_for('.static', filename='style.css')}}">
+	<title>Notas - Todo App</title>
+```
