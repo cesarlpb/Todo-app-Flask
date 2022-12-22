@@ -203,4 +203,6 @@ Creamos un entorno virtual con la versión de Python que queramos:
 ```
 pyenv virtualenv 3.10.9 venv_todo_app
 ```
-**Nota:** Si aparece el error, [seguir estos pasos](https://github.com/pyenv/pyenv-virtualenv#installation).
+**Nota:** 
+- Si aparece el error, [seguir estos pasos](https://github.com/pyenv/pyenv-virtualenv#installation).
+- Si no encuentra `pyenv`, [revisar este hilo](https://github.com/pyenv/pyenv-installer/issues/112).
