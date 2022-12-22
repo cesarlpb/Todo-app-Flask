@@ -5,7 +5,7 @@ Aplicación de Flask para crear, editar, borrar y ver notas (todos) de cosas por
 
 Aplicación de notas de cosas por hacer. Se debe poder crear notas, editarlas, borrarlas, marcarlas como completadas, etc. Login para ver las notas de cada usuario. Registro para iniciar sesión como usuario. 
 - [ X ] Crear unos mocks o diseños de la app
-- [ ] Crear un repositorio en GitHub para el proyecto
+- [ X ] Crear un repositorio en GitHub para el proyecto
 - [ ] Crear un proyecto de Flask para conectar con la base de datos -> API
 - [ ] Creamos el front con vistas desde Flask
 - [ ] Vistas: Login, Registro, Inicio/Home, Crear nota, Editar nota, Borrar nota, Notas completadas, Notas pendientes
@@ -101,3 +101,58 @@ RGB [%]: 4.7–50.2–23.1
 - Título principal o título en logo: [Tomorrow](https://fonts.google.com/specimen/Tomorrow) - 400
 - Subtítulo en logo o h2: [Poppins Medium](https://fonts.google.com/specimen/Poppins?query=poppins) - 500
 - Texto: [Poppings Regular](https://fonts.google.com/specimen/Poppins?query=poppins) - 400
+
+## Flask
+
+### Instalación de pyenv + Entorno virtual con venv
+
+- [Post](https://dev.to/dendihandian/pyenv-in-windows-4lpe) sobre cómo controlar las versiones entre proyectos en Python con Windows. **Nota: mirar los dos primeros posts de la serie o el primero.**
+- [pyenv-win](https://pyenv-win.github.io/pyenv-win/) -> Instalación de pyenv en Windows
+
+**Mac OS**
+Con brew:
+```
+brew install pyenv
+```
+[Versiones estables en Mac OS](https://www.python.org/downloads/macos/)
+```
+pyenv install 3.10.9
+```
+Instalamos `pyenv-virtualenv`
+```
+brew install pyenv-virtualenv
+```
+```
+pyenv virtualenv 3.10.9 venv_todo_app
+```
+Activamos el entorno virtual
+```
+pyenv activate venv_todo_app
+```
+**Nota:** Si aparece el siguiente error:
+```
+Failed to activate virtualenv.
+
+Perhaps pyenv-virtualenv has not been loaded into your shell properly.
+Please restart current shell and try again.
+```
+hay que realizar los [pasos de cargar pyenv en el shell](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv):
+
+(En mi caso es `zsh`)
+```
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+```
+Reiniciar el terminal para que los cambios tengan efecto:
+```
+exec "$SHELL"
+```
+Probamos a activar el entorno virtual de nuevo:
+```
+pyenv activate venv_todo_app
+```
+**Nota: mirar los dos primeros posts de la serie o el primero.**
+**Ubuntu**
+
+**Windows**
