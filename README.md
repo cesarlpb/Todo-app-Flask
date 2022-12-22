@@ -247,3 +247,10 @@ pyenv deactivate
     Get-ExecutionPolicy
     ```
     Debe salir `Restricted`.
+
+## Flask
+- Abrimos venv con `pyenv activate venv_todo_app`
+- Instalamos Flask:
+```
+pip install Flask
+```
