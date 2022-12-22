@@ -249,8 +249,24 @@ pyenv deactivate
     Debe salir `Restricted`.
 
 ## Flask
-- Abrimos venv con `pyenv activate venv_todo_app`
+- Abrimos venv con `pyenv activate venv_todo_app` o `Scripts\activate`
 - Instalamos Flask:
 ```
 pip install Flask
 ```
+- Creamos el archivo `app.py`:
+```python
+    from flask import Flask
+
+    app = Flask(__name__)
+
+    @app.route("/")
+    def hello():
+        return "Hello, World!"
+```
+- Guardar. Y para ejecutar la app de Flask (desde la misma ubicación de `app.py`):
+```
+flask run
+```
+Debe salir un `Hello, world` en el navegador:
+![Hello, world](./docs/img/hello%2C%20world.png "Hello, world en Flask")
