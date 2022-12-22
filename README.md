@@ -153,6 +153,54 @@ Probamos a activar el entorno virtual de nuevo:
 pyenv activate venv_todo_app
 ```
 **Nota: mirar los dos primeros posts de la serie o el primero.**
-**Ubuntu**
 
+**Ubuntu**
+Vamos a realizar los pasos en el servidor `Formacion-POO`
+- Primero, hacemos snap o backup del servidor.
+- Instalamos pyenv. [Post con los pasos para Ubuntu.](https://itslinuxfoss.com/install-use-pyenv-ubuntu/)
+```
+sudo apt update
+curl https://pyenv.run | bash
+```
+**Nota:**
+- Si aparecen errores o problemas de dependencia ejecutad estos comandos:
+```
+sudo apt install curl -y 
+sudo apt install git -y
+```
+Añadimos variable de entorno para bash:
+```
+export PATH="$HOME/.pyenv/bin:$PATH" && eval "$(pyenv init --path)" && echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+```
+Reiniciamos el shell de bash:
+```
+exec $SHELL
+```
+Comprobamos instalación con:
+```
+pyenv 2.3.9
+```
 **Windows**
+[Repositorio de pyenv-win](https://github.com/pyenv-win/pyenv-win)
+[Métodos de Instalación de pyenv-win en Windows](https://github.com/pyenv-win/pyenv-win#installation)
+pendiente
+
+### Una vez pyenv se ha instalado
+
+Podemos ver las versiones disponibles de Python:
+```
+pyenv install --list
+```
+Instalamos la versión estble de `Python 3.10.9`:
+```
+pyenv install 3.10.9
+```
+Comprobamos versiones instaladas de Python con pyenv:
+```
+pyenv versions
+```
+Creamos un entorno virtual con la versión de Python que queramos:
+```
+pyenv virtualenv 3.10.9 venv_todo_app
+```
+**Nota:** Si aparece el error, [seguir estos pasos](https://github.com/pyenv/pyenv-virtualenv#installation).
