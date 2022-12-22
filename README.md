@@ -21,11 +21,17 @@ Aplicación de notas de cosas por hacer. Se debe poder crear notas, editarlas, b
 - Despliegue: Fleek.co
 
 
-## Paleta de colores
+## Diseño
+### Plantillas de Canva
+- [Logo cuadrado de 500x500](https://www.canva.com/design/DAFVekshKYE/Aff168TLplloOTraEBlrmQ/view?utm_content=DAFVekshKYE&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview)
+- [Logo rectangular de 500x250](https://www.canva.com/design/DAFVekmfN_g/sFe582vT5ptD5YkqcE9sNA/view?utm_content=DAFVekmfN_g&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview)
+- [Logo rectangular de 500x125](https://www.canva.com/design/DAFVegLPYSc/4o8lbWx29QSYABXxeBp-7A/view?utm_content=DAFVegLPYSc&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview)
+
+### Paleta de colores
 
 - [Paletton](https://paletton.com/#uid=30C0u0klMuCc6LyhuAUqFsmt5mh)
 
-### Primario
+#### Primario
 #FFD29F
 RGB: 255–210–159
 RGB [%]: 100–82.4–62.4
@@ -46,7 +52,7 @@ RGB [%]: 88.6–53.7–14.9
 RGB: 177–101–16
 RGB [%]: 69.4–39.6–6.3
 
-### Secundario #1
+#### Secundario #1
 #919BD8
 RGB: 145–155–216
 RGB [%]: 56.9–60.8–84.7
@@ -67,7 +73,7 @@ RGB [%]: 16.9–22.7–60.8
 RGB: 25–39–122
 RGB [%]: 9.8–15.3–47.8
 
-### Secundario #2
+#### Secundario #2
 #89DCAB
 RGB: 137–220–171
 RGB [%]: 53.7–86.3–67.1
