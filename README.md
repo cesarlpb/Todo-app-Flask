@@ -4,7 +4,7 @@ Aplicación de Flask para crear, editar, borrar y ver notas (todos) de cosas por
 ## Todo app
 
 Aplicación de notas de cosas por hacer. Se debe poder crear notas, editarlas, borrarlas, marcarlas como completadas, etc. Login para ver las notas de cada usuario. Registro para iniciar sesión como usuario. 
-- [ ] Crear unos mocks o diseños de la app
+- [ X ] Crear unos mocks o diseños de la app
 - [ ] Crear un repositorio en GitHub para el proyecto
 - [ ] Crear un proyecto de Flask para conectar con la base de datos -> API
 - [ ] Creamos el front con vistas desde Flask
@@ -22,10 +22,12 @@ Aplicación de notas de cosas por hacer. Se debe poder crear notas, editarlas, b
 
 
 ## Diseño
+Diseño inicial como sitio web en Canva. [Notas app](https://notas-app.my.canva.site/)
 ### Plantillas de Canva
 - [Logo cuadrado de 500x500](https://www.canva.com/design/DAFVekshKYE/Aff168TLplloOTraEBlrmQ/view?utm_content=DAFVekshKYE&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview)
 - [Logo rectangular de 500x250](https://www.canva.com/design/DAFVekmfN_g/sFe582vT5ptD5YkqcE9sNA/view?utm_content=DAFVekmfN_g&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview)
 - [Logo rectangular de 500x125](https://www.canva.com/design/DAFVegLPYSc/4o8lbWx29QSYABXxeBp-7A/view?utm_content=DAFVegLPYSc&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview)
+- [Plantilla del sitio web en Canva](https://www.canva.com/design/DAFVecOVvXY/SLaoMm8UE0LITce1YJEb5w/view?utm_content=DAFVecOVvXY&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview)
 
 ### Paleta de colores
 
@@ -93,3 +95,9 @@ RGB [%]: 10.6–63.5–32.2
 #0C803B
 RGB: 12–128–59
 RGB [%]: 4.7–50.2–23.1
+
+### Fuentes
+
+- Título principal o título en logo: [Tomorrow](https://fonts.google.com/specimen/Tomorrow) - 400
+- Subtítulo en logo o h2: [Poppins Medium](https://fonts.google.com/specimen/Poppins?query=poppins) - 500
+- Texto: [Poppings Regular](https://fonts.google.com/specimen/Poppins?query=poppins) - 400
