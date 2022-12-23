@@ -7,7 +7,7 @@ Aplicación de notas de cosas por hacer. Se debe poder crear notas, editarlas, b
 - [ X ] Crear unos mocks o diseños de la app
 - [ X ] Crear un repositorio en GitHub para el proyecto
 - [ ] Crear un proyecto de Flask para conectar con la base de datos -> API
-- [ ] Creamos el front con vistas desde Flask
+- [ home ] Creamos el front con vistas desde Flask
 - [ ] Vistas: Login, Registro, Inicio/Home, Crear nota, Editar nota, Borrar nota, Notas completadas, Notas pendientes
 - [ ] Valorar: añadir tags o categorías para clasificar las notas
 - [ ] Valorar: añadir un buscador para buscar notas por título o contenido
