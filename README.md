@@ -183,8 +183,9 @@ exec $SHELL
 ```
 Comprobamos instalación con:
 ```
-pyenv 2.3.9
+pyenv --version
 ```
+Debe salir el número de versión de pyenv.
 **Windows**
 [Repositorio de pyenv-win](https://github.com/pyenv-win/pyenv-win)
 [Métodos de Instalación de pyenv-win en Windows](https://github.com/pyenv-win/pyenv-win#installation)
@@ -277,3 +278,23 @@ Debe salir un `Hello, world` en el navegador:
 ![Hello, world](./docs/img/hello%2C%20world.png "Hello, world en Flask")
 
 Siguientes pasos en [Flask](./docs/flask.md)
+
+## Despliegue en desarrollo
+
+Por el momento, hay que ejecutar este comando para acceder a `pyenv`:
+```bash
+export PATH="$HOME/.pyenv/bin:$PATH" && eval "$(pyenv init --path)" && echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+```
+```bash
+exec $SHELL
+```
+Hemos editado `app.py` para que salga por el IP del servidor: `IP:puerto/rutas`:
+```python
+# 5000
+if __name__ == '__main__':
+   app.run(host="0.0.0.0", port=5000, debug = True)
+```
+Hemos añadido el servicio a PM2 con:
+```
+pm2 start app.py --interpreter python3 --name nombre-carpeta-puerto
+```
