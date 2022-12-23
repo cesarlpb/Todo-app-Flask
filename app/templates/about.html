@@ -1,23 +1,39 @@
 {% block about %}
-<section id="about" class="text-center border-bottom py-5">
-
-    <div class="col-5 d-inline-block">
-        <div class="row">
-            <h2 class="d-inline-block mx-2 text-primary lead" >App de notas</h2>
+<section id="about">
+    <div class="row px-10 pt-5 pb-5 align-items-center justify-content-center">
+        <div class="col-5 d-inline-block px-5">
+            <div class="row">
+                <h2 class="fs-2" >Regístrate. Crea. Haz.</h2>
+            </div>
+            <div class="row my-3">
+                <p class="fs-1-25">Ahora podrás recordar lo que tienes que hacer en todo momento.</p>
+                <p class="fs-1-25">¡Empieza ahora!</p>
+            </div>
         </div>
-        <div class="row my-3">
-            <p>Notas es una app de todos</p>
+        
+        <div class="container col-5 px-0">
+            <div class="row">
+                <div class="col-6 post-it bg-amarillo-primario py-5 px-5 justify-self-start" >
+                    <h3 class="upper">Lista de la compra 1:</h3>
+                    <ul style="padding-left: 0; list-style-type: none;">
+                        <li>Café 1</li>
+                        <li>Café 2</li>
+                        <li>Café 3</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row justify-content-end">
+                <div class="col-6 post-it bg-amarillo-primario py-5 px-5">
+                    <h3 class="upper">Lista de la compra 2:</h3>
+                    <ul style="padding-left: 0; list-style-type: none;">
+                        <li>Café 4</li>
+                        <li>Café 5</li>
+                        <li>Café 6</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="col-5 d-inline-block">
-        <div class="my-2">
-            <img class="d-inline-block" src="https://via.placeholder.com/150?text=pic-1" alt="pic-1">
-        </div>
-        <div class="my-2">
-            <img class="d-inline-block" src="https://via.placeholder.com/150?text=pic-2" alt="pic-2">
-        </div>
-    </div>
-    
 </section>
 {% endblock %}
