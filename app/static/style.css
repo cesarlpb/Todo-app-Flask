@@ -133,3 +133,12 @@ h3 {
     padding: 4rem 2rem;
     border-radius: 40px;
 }
+
+/* Footer */
+
+footer h4, footer p{
+    text-align: left;
+}
+.my-btn {
+    width: 150px;
+}
