@@ -50,6 +50,9 @@ h3 {
 }
 
 /* Font sizes */
+.fs-1-25{
+    font-size: 1.25rem;
+}
 .fs-2{
     font-size: 2rem;
 }
@@ -101,6 +104,8 @@ h3 {
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
+    width: 300px;
+    height: 250px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
