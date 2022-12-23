@@ -1,6 +1,8 @@
 # Todo-app-Flask
 Aplicación de Flask para crear, editar, borrar y ver notas (todos) de cosas por hacer.
 
+![Diagrama de la aplicación de Todos](/diagramas/diagrama-todo-app-flask.png)
+
 ## Todo app
 
 Aplicación de notas de cosas por hacer. Se debe poder crear notas, editarlas, borrarlas, marcarlas como completadas, etc. Login para ver las notas de cada usuario. Registro para iniciar sesión como usuario. 
