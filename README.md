@@ -303,3 +303,22 @@ Hemos añadido el servicio a PM2 con:
 ```
 pm2 start app.py --interpreter python3 --name nombre-carpeta-puerto
 ```
+
+## MySQL
+- Para acceder a MySQL:
+```
+mysql -p
+```
+- Pide contraseña (super segura)
+- Ver bases de datos:
+```
+SHOW databases;
+```
+- Seleccionar base de datos:
+```
+USE nombre_base_datos;
+```
+- Queries:
+```
+SELECT * FROM nombre_tabla;
+```
