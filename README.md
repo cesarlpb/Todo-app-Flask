@@ -33,7 +33,10 @@ Diseño inicial como sitio web en Canva. [Notas app](https://notas-app.my.canva.
 
 - [Paletton](https://paletton.com/#uid=30C0u0klMuCc6LyhuAUqFsmt5mh)
 
-#### Primario
+#### Amarillo Primario
+
+- Nota: estos azules son un poco oscuros asi que por ahora estamos colocando este otro: #2A6EF2
+
 #FFD29F
 RGB: 255–210–159
 RGB [%]: 100–82.4–62.4
@@ -54,7 +57,7 @@ RGB [%]: 88.6–53.7–14.9
 RGB: 177–101–16
 RGB [%]: 69.4–39.6–6.3
 
-#### Secundario #1
+#### Azul Secundario #1
 #919BD8
 RGB: 145–155–216
 RGB [%]: 56.9–60.8–84.7
@@ -75,7 +78,7 @@ RGB [%]: 16.9–22.7–60.8
 RGB: 25–39–122
 RGB [%]: 9.8–15.3–47.8
 
-#### Secundario #2
+#### Verde Secundario #2
 #89DCAB
 RGB: 137–220–171
 RGB [%]: 53.7–86.3–67.1
