@@ -1,7 +1,123 @@
-body{
-    background-color: skyblue;
+body, #triangulo{
+    background-color: white;
 }
 body, html {
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+/* Variables - Colores */
+:root{
+    --amarillo-primario: #FBC55C; /* fondo para los post-its */
+    --amarillo-principal: #F4A64E;
+    --amarillo-claro: #FFD29F;
+    --amarillo-oscuro: #B16510;
+    --azul-secundario: #2A6EF2; /* resalta mejor */
+    --azul-principal: #4452A7;
+    --azul-claro: #919BD8;
+    --azul-oscuro: #19267A;
+    --verde-terciario: #38AF68; 
+}
+.logo{
+    font-family: 'Tomorrow', sans-serif;
+}
+/* Headings */
+h1, h2, h3, h4, h5, h6, .boton {
+    color: var(--azul-secundario);
+}
+h1{
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+h2{
+    font-size: 1.25rem;
+    margin-bottom: 0;
+}
+h3, h4, h5, h6{
+    font-size: 1rem;
+}
+h3 {
+    font-weight: 500;
+}
+/* Text */
+.upper{
+    text-transform: uppercase;
+}
+.lower{
+    text-transform: lowercase;
+}
+
+/* Font sizes */
+.fs-2{
+    font-size: 2rem;
+}
+/* Background-color */
+.bg-amarillo-primario{
+    background-color: var(--amarillo-primario);
+}
+.bg-amarillo-principal{
+    background-color: var(--amarillo-principal);
+}
+.bg-amarillo-claro{
+    background-color: var(--amarillo-claro);
+}
+.bg-amarillo-oscuro{
+    background-color: var(--amarillo-oscuro);
+}
+/* Paddings y espaciados personalizados */
+.px-7{
+    padding: 0 7vw;
+}
+.py-7{
+    padding: 7vh 0;
+}
+.p-7{
+    padding: 7vh 7vw;
+}
+.px-10{
+    padding: 0 10vw;
+}
+.py-10{
+    padding: 10vh 0;
+}
+.p-10{
+    padding: 10vh 10vw;
+}
+/* Medidas % */
+.w-40{
+    width: 40%;
+}
+/* Post-it */
+.post-it::before{
+    content: url('./img/cinta-100x50-no-bg-larger.png');
+    position: absolute;
+    top: -25px;
+    left: calc(50% - 50px);
+}
+.post-it{
+    background-color: var(--amarillo-primario);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Seccióin Home */
+
+#home{
+    background-image: linear-gradient(to right, #0FDBDB, #0875D8);
+}
+#triangulo {
+    margin: 0;
+    padding: 0;
+    height: 200px;
+    display: block;
+    width: 100;
+    -webkit-clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+    clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+}
+.boton{
+    background-color: white;
 }
