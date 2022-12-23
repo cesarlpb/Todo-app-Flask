@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+    <title>Notas - Todo App</title>
+    <!-- Hoja de Bootstrap 5 -->
+    <link rel="stylesheet"  type="text/css" href="{{url_for('.static', filename='bootstrap.min.css')}}">
+    <!-- Hojas de estilo -->
+    <link rel="stylesheet"  type="text/css" href="{{url_for('.static', filename='style.css')}}">
+</head>
+<html>
+    <body>
+    {% block home %}
+    {% endblock %}
+    </body>
+    {% include 'footer.html' %}
+</html> 
