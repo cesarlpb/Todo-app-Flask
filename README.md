@@ -281,6 +281,9 @@ Siguientes pasos en [Flask](./docs/flask.md)
 
 ## Despliegue en desarrollo
 
+- [PM2 para Flask](https://blog.jcharistech.com/2022/01/14/managing-python-flask-app-with-pm2/)
+- [Despliegues](https://smirnov-am.github.io/deploy-flask/)
+
 Por el momento, hay que ejecutar este comando para acceder a `pyenv`:
 ```bash
 export PATH="$HOME/.pyenv/bin:$PATH" && eval "$(pyenv init --path)" && echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.bashrc
@@ -294,6 +297,8 @@ Hemos editado `app.py` para que salga por el IP del servidor: `IP:puerto/rutas`:
 if __name__ == '__main__':
    app.run(host="0.0.0.0", port=5000, debug = True)
 ```
+**-> Cambiad el puerto a uno que esté libre si no: ¯\\\_(シ)_/¯ <-**
+
 Hemos añadido el servicio a PM2 con:
 ```
 pm2 start app.py --interpreter python3 --name nombre-carpeta-puerto
