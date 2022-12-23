@@ -1,21 +1,21 @@
 {% block footer %}
  
-<footer class="border-top text-center d-flex align-items-center justify-content-center mx-auto mt-3 py-5">
-    <div class="col-5 d-inline-block">
+<footer class="border-top text-center d-flex align-items-center justify-content-between mx-auto mt-3 px-10 py-5">
+    <div class="col-3 d-inline-block">
         <div class="row">
             <img class="d-inline-block mx-auto" src="{{ url_for('static', filename='img/logos/logo-circular-no-bg.png') }}" width="100" alt="logo">
         </div>
         <div class="my-5">
-            <h4>Redes Sociales</h4>
+            <h3 class="fs-1-25">Redes Sociales</h3>
             <ul style="padding-left: 0; list-style-type:none;">
-                <li><a href="#" target="_blank" rel="noopener">Link 1</a></li>
-                <li><a href="#" target="_blank" rel="noopener">Link 2</a></li>
-                <li><a href="#" target="_blank" rel="noopener">Link 3</a></li>
+                <li><a class="my-btn btn border my-1 d-inline-flex justify-content-around align-items-center" href="#" target="_blank" rel="noopener"><img src="{{ url_for('static', filename='img/iconos/instagram500x500.png') }}" width="32" alt="instagram">Instagram</a></li>
+                <li><a class="my-btn btn border my-1 d-inline-flex justify-content-around align-items-center" href="#" target="_blank" rel="noopener"><img src="{{ url_for('static', filename='img/iconos/linkedin500x500.png') }}" width="32" alt="linkedin">Linkedin</a></li>
+                <li><a class="my-btn btn border my-1 d-inline-flex justify-content-around align-items-center" href="#" target="_blank" rel="noopener"><img src="{{ url_for('static', filename='img/iconos/github512x512.png') }}" width="32" alt="github">Github</a></li>
             </ul>
         </div>
     </div>
 
-    <div class="col-5 d-inline-block mt-2">
+    <div class="col-3 d-inline-block mt-2">
         <div class="my-2">
             <h4>Dirección</h4>
             <p>123 Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
