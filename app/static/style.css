@@ -126,3 +126,10 @@ h3 {
 .boton{
     background-color: white;
 }
+
+/* Sección - What you can do */
+.my-card{
+    background-color: #6470BE;
+    padding: 4rem 2rem;
+    border-radius: 40px;
+}

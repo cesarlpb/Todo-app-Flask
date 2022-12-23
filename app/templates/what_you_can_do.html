@@ -1,18 +1,21 @@
 {% block what_you_can_do %}
-<section id="what-you-can-do" style="background-color: #6470BE;" class="text-center py-5">
-    <h2 class="text-primary">¿Qué puedes hacer?</h2>
-    <div class="row justify-content-center">
-        <div class="col-3">
+<section id="what-you-can-do" class="text-center py-5 ">
+    <h2 class="mt-0 mb-5 fs-2">¿Qué puedes hacer?</h2>
+    <div class="row px-10 justify-content-around">
+        <div class="col-3 my-card card">
             <img class="d-inline-block mx-auto my-3" src="{{ url_for('static', filename='img/iconos/user.png') }}" width="100" alt="user">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta, quisquam.</p>
+            <h3 class="text-white my-2">Registro</h3>
+            <p class="text-white">Crea tu usuario en unos pocos pasos.</p>
         </div>
-        <div class="col-3">
+        <div class="col-3 my-card card">
             <img class="d-inline-block mx-auto my-3" src="{{ url_for('static', filename='img/iconos/pen.png') }}" width="100" alt="pen">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta, quisquam.</p>
+            <h3 class="text-white my-2">Crea tus Notas</h3>
+            <p class="text-white">Y léelas cuando quieras.</p>
         </div>
-        <div class="col-3">
+        <div class="col-3 my-card card">
             <img class="d-inline-block mx-auto my-3" src="{{ url_for('static', filename='img/iconos/mobile.png') }}" width="100" alt="mobile">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta, quisquam.</p>
+            <h3 class="text-white my-2">Lleva tus Notas</h3>
+            <p class="text-white">Disponibles en móvil o PC.</p>
         </div>
     </div>
 </section>
