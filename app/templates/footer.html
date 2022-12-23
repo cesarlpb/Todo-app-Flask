@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+ 
+{% block footer %}
+ 
+<footer class="border-top text-center d-flex align-items-center justify-content-center mx-auto mt-3 py-5">
+    <div class="col-5 d-inline-block">
+        <div class="row">
+            <img class="d-inline-block mx-auto" src="{{ url_for('static', filename='img/logos/logo-circular-no-bg.png') }}" width="100" alt="logo">
+        </div>
+        <div class="my-5">
+            <h4>Redes Sociales</h4>
+            <ul style="padding-left: 0; list-style-type:none;">
+                <li><a href="#" target="_blank" rel="noopener">Link 1</a></li>
+                <li><a href="#" target="_blank" rel="noopener">Link 2</a></li>
+                <li><a href="#" target="_blank" rel="noopener">Link 3</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-5 d-inline-block mt-2">
+        <div class="my-2">
+            <h4>Dirección</h4>
+            <p>123 Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+        </div>
+        <div class="my-2">
+            <h4>Email</h4>
+            <p><a href="#">email@my-awesome-domain.com</a></p>
+        </div>
+        <div class="my-2">
+            <h4>Teléfono</h4>
+            <p><a href="#">(123) 456 789</a></p>
+        </div>
+    </div>
+</footer>
+ 
+{% endblock %}
