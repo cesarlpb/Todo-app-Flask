@@ -92,3 +92,8 @@ Objetivo: tener una plantilla base que se extienda a todas las demás plantillas
             `endblock`
             ├── footer.html (se incluye en base.html)
 ```
+
+## Footer
+Iconos:
+    - [Font Awesome](https://fontawesome.com/)
+    - [Flaticon](https://www.flaticon.com/) -> descargar PNG
