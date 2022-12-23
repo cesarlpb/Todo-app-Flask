@@ -1,32 +1,43 @@
 {% extends 'base.html' %}
 
 {% block home %}
-<section id="home" class="text-center border-bottom">
+<section id="home">
 
-    <div class="col-5 d-inline-block py-5">
-        <div class="row">
-            <img class="d-inline-block mx-2" src="https://via.placeholder.com/200x100?text=logo" alt="logo">
-            <h1 class="d-inline-block mx-2" >Notas</h1>
-            <h2 class="d-inline-block mx-2" >App de notas</h2>
-        </div>
-        <div class="row my-3">
-            <p>Notas es una app de todos</p>
-        </div>
-        <div class="row my-3">
-            <button class="btn btn-primary mx-auto">Empezar</button>
-        </div>
-
-    </div>
-
-    <div class="col-5 d-inline-block border bg-warning py-3">
-        <h3>Lista de la compra:</h3>
-        <ul style="padding-left: 0; list-style-type: none;">
-            <li>Café</li>
-            <li>Café</li>
-            <li>Café</li>
-        </ul>
-    </div>
+    <div class="d-flex text-center px-3 align-items-center justify-content-center">
+        <div class="col-5 d-inline-block py-5">
+            <div class="row px-7 align-items-center">
+                <img class="d-inline-block" 
+                src="{{ url_for('static', filename='img/logos/logo500x500-sin-letras.png') }}" 
+                width="125"
+                alt="logo">
+                <div class="ml-3">
+                    <h1 class="logo" >Notas</h1>
+                    <h2 class="upper" >Todo App</h2>
+                </div>
+            </div>
+            <div class="row my-5 fs-2 text-white text-center justify-content-center">
+                <p>Escribe lo que tienes que hacer
+                    para no olvidarlo</p>
+            </div>
+            <div class="row my-3">
+                <button class="btn mx-auto boton rounded-pill w-40">Empezar</button>
+            </div>
     
+        </div>
+    
+        <div class="col-5 d-inline-flex py-3 px-0 justify-content-end">
+            <div class="col-7 post-it bg-amarillo-primario p-5">
+                <h3 class="upper">Lista de la compra:</h3>
+                <ul style="padding-left: 0; list-style-type: none;">
+                    <li>Café</li>
+                    <li>Café</li>
+                    <li>Café</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="triangulo"></div>
 </section>
 
 {% include 'about.html' %}
