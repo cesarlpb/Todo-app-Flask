@@ -447,3 +447,15 @@ passwd nombre_de_usuario
 getent passwd
 ```
 Y miramos los users que tienen `/home`. [Más info](https://phoenixnap.com/kb/how-to-list-users-linux)
+
+### Backup de WSL
+
+- [Todos los pasos para crear backup](https://www.windowscentral.com/how-backup-windows-subsystem-linux-wsl-distribution)
+
+Exportar:
+```
+wsl --export Ubuntu-22.04 nombre_del_backup.tar
+```
+Importar:
+
+*pendiente*
