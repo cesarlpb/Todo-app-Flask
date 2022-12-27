@@ -449,7 +449,7 @@ getent passwd
 Y miramos los users que tienen `/home`. [Más info](https://phoenixnap.com/kb/how-to-list-users-linux)
 
 ### Backup de WSL
-
+- [Post en foro sobre los backups del WSL](https://qastack.mx/superuser/1164818/how-to-backup-wsl-linux-subsystem-for-windows-10-before-system-reset-or-reinstall)
 - [Todos los pasos para crear backup](https://www.windowscentral.com/how-backup-windows-subsystem-linux-wsl-distribution)
 
 Exportar:
