@@ -316,16 +316,48 @@ virtualenv nombre_del_entorno
 ```
 sudo su - nombre_usuario
 ```
+
 ```
 cd ubicación_entorno
 ```
-**Como root:**
-```
-source bin/activate
-```
+
 **Como usuario normal:**
 ```
 . ./bin/activate
+```
+Instalar flask:
+```
+pip install flask
+```
+Para generar `requirements.txt`:
+```
+pip freeze > requirements.txt
+```
+Para instalar librerías de `requirements.txt`:
+```
+pip install -r requirements.txt
+```
+Para ver las librerías instaladas (debe salir flask y algunas más):
+```
+pip list
+```
+![pip list](./docs/img/pip_list.png "pip list")
+Si queremos iniciar la app de `app.py`:
+```
+python3 app.py
+```
+o bien:
+```
+flask run
+```
+**Como root:**
+Activar entorno virtual:
+```
+source bin/activate
+```
+Para desactivar entorno virtual:
+```
+deactivate
 ```
 ## PM2
 Hemos editado `app.py` para que salga por el IP del servidor: `IP:puerto/rutas`:
