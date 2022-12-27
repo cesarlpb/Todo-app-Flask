@@ -350,6 +350,14 @@ o bien:
 ```
 flask run
 ```
+**Nota:** Si queremos levantar la app por un puerto distinto al de defecto (`5000`) con `flask run`:
+```
+flask run --port 5001
+```
+o bien:
+```
+flask run -p 5001
+```
 **Como root:**
 Activar entorno virtual:
 ```
