@@ -189,8 +189,39 @@ Debe salir el número de versión de pyenv.
 **Windows**
 [Repositorio de pyenv-win](https://github.com/pyenv-win/pyenv-win)
 [Métodos de Instalación de pyenv-win en Windows](https://github.com/pyenv-win/pyenv-win#installation)
-pendiente
 
+**WSL -> Ubuntu 22.04**
+
+Instalamos `pip` (no es necesario para `pyenv`):
+```
+sudo apt update
+sudo apt install python3-pip
+```
+Instalación `pyenv` [Instalación para bash](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv) con instalador automático:
+```
+curl https://pyenv.run | bash
+```
+**Setup del archivo de config del terminal -> BASH**
+```
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+echo 'eval "$(pyenv init -)"' >> ~/.profile
+```
+Reiniciar el terminal:
+```
+exec $SHELL
+```
+- Si hay problemas con dependencias:
+    - [Revisar FAQ del pyenv](https://github.com/pyenv/pyenv/wiki#suggested-build-environment)
+    - [Instalar dependencias]():
+    ```
+    sudo apt update; sudo apt install build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev curl llvm \
+    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+    ```
+- Exportar con `.bashrc`. [Instalación](https://itslinuxfoss.com/install-use-pyenv-ubuntu)
+- Borrar últimas líneas añadidas a `~/.profile` (export ... ... profile)
+- Reiniciar terminal con `exec $SHELL`
 ### Una vez pyenv se ha instalado
 
 Podemos ver las versiones disponibles de Python:
@@ -399,3 +430,20 @@ USE nombre_base_datos;
 ```
 SELECT * FROM nombre_tabla;
 ```
+
+## WSL
+- Si no recuerdas la contraseña del usuario de WSL:
+    - Abrir Powershell:
+    ```
+    ubuntu2204 config --default-user root
+    ``` 
+**Nota:** editad la versión de ubuntu en `ubuntuxx04`
+- Volvemos a abrir WSL:
+```
+passwd nombre_de_usuario
+```
+- Para ver los usuarios podemos usar:
+```
+getent passwd
+```
+Y miramos los users que tienen `/home`. [Más info](https://phoenixnap.com/kb/how-to-list-users-linux)
