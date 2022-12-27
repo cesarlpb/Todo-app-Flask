@@ -399,12 +399,20 @@ Para desactivar entorno virtual:
 deactivate
 ```
 ## PM2
-Hemos editado `app.py` para que salga por el IP del servidor: `IP:puerto/rutas`:
+Hemos editado `app.py` para que salga por el IP del servidor: `IP:puerto/rutas` con `host='0.0.0.0'`:
 ```python
 # 5000
 if __name__ == '__main__':
    app.run(host="0.0.0.0", port=5000, debug = True)
 ```
+Si solo queremos `localhost`:
+```python
+if __name__ == '__main__':
+    # Descomentamos host=... si queremos IP pública para la app
+    # app.run(host="0.0.0.0", port=5000, debug=True)
+    # Solo localhost o 127.0.0.1:
+    app.run(port=5000, debug=True)
+``` 
 **-> Cambiad el puerto a uno que esté libre si no: ¯\\\_(シ)_/¯ <-**
 
 Hemos añadido el servicio a PM2 con:
