@@ -284,6 +284,7 @@ Siguientes pasos en [Flask](./docs/flask.md)
 - [PM2 para Flask](https://blog.jcharistech.com/2022/01/14/managing-python-flask-app-with-pm2/)
 - [Despliegues](https://smirnov-am.github.io/deploy-flask/)
 
+### Entorno virtual usando pyenv
 Por el momento, hay que ejecutar este comando para acceder a `pyenv`:
 ```bash
 export PATH="$HOME/.pyenv/bin:$PATH" && eval "$(pyenv init --path)" && echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.bashrc
@@ -291,6 +292,42 @@ export PATH="$HOME/.pyenv/bin:$PATH" && eval "$(pyenv init --path)" && echo -e '
 ```bash
 exec $SHELL
 ```
+Para ver los entornos disponibles o creados:
+```
+pyenv virtualenvs
+```
+Para crear un entorno virtual:
+```
+pyenv virtualenv 3.10.9 nombre_del_entorno
+```
+Para activar el entorno virtual:
+```
+pyenv activate nombre_del_entorno
+```
+### Entorno virtual usando virtualenv o venv
+- Navegamos a la ubicación para el entorno.
+- Creamos el entorno virtual:
+```
+virtualenv nombre_del_entorno
+```
+- Activamos el entorno virtual:
+**Como usuario normal:**
+
+```
+sudo su - nombre_usuario
+```
+```
+cd ubicación_entorno
+```
+**Como root:**
+```
+source bin/activate
+```
+**Como usuario normal:**
+```
+. ./bin/activate
+```
+## PM2
 Hemos editado `app.py` para que salga por el IP del servidor: `IP:puerto/rutas`:
 ```python
 # 5000
