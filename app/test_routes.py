@@ -44,27 +44,65 @@ def create():
         finally:
             con.close() # close the connection
         
+        return render_template('test_create_thanks.html', question=question)
+
     else:
         return 'Método no permitido', 405 # 400 de Bad Request o 405 de método no permitido
 
-        return render_template('test_create_thanks.html', question=question)
-
+# Display all questions in db
+@app.route('/question')
+def questions():
+    # Leer todas las preguntas que hay en db y sacarlas en una tabla
+    return "Mostrar preguntas"
 
 # Display question
 @app.route('/question/<int:id>', methods=['GET', 'POST'])
 def question(id):
     if request.method == 'GET':
         # send the form
-        # add code here to read the question from database
-        question = "Not added yet"
+        # code to read the question from database
+        try:
+            con = sql.connect(db_name)
+            c =  con.cursor() # cursor
+            # read question : SQLite index start from 1 (see index.html)
+            
+            id = 1 # revisar
+            # print(f"Select Question FROM {db_table} where id = {0}".format(id))
+
+            query = f"Select Question FROM {db_table} where id = 1"
+            c.execute(query)
+            question = c.fetchone() # fetch the data from cursor
+            con.commit() # apply changes
+            # go to thanks page : pass the value of tuple using question[0]
+            return render_template('test_question.html', question=question[0])
+        except con.Error as err: # if error
+            # then display the error in 'database_error.html' page
+            return render_template('test_db_error.html', error=err)
+        finally:
+            con.close() # close the connection
 
         return render_template('test_question.html', question=question)
     else: # request.method == 'POST':
         # read and check answers
         submitted_answer = request.form['answer']
 
-        # add code here to read the answer from database
-        correct_answer = "Not added"
+        # code to read the answer from database
+        try:
+            con = sql.connect(db_name)
+            c =  con.cursor() # cursor
+            # read answer : SQLite index start from 1 (see index.html)
+            
+            query = f"Select Answer FROM {db_table} where id = 1" # revisar
+            # query = f"Select Answer FROM {db_table} where id = {0}".format(id)
+
+            c.execute(query)
+            correct_answer = c.fetchone()[0] # fetch and store tuple-value (see [0])
+            con.commit() # apply changes
+        except con.Error as err: # if error
+            # then display the error in 'database_error.html' page
+            return render_template('test_db_error.html', error=err)
+        finally:
+            con.close() # close the connection
 
         if submitted_answer == correct_answer:
             return render_template('test_correct.html');
