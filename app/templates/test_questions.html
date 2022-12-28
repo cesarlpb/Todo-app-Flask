@@ -1,0 +1,30 @@
+<!-- question.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Preguntas</title>
+</head>
+<body>
+    <h1>Preguntas</h1>
+
+    <table>
+        <tr>
+            <th>Pregunta</th>
+            <th>Respuesta</th>
+        </tr>
+        {% for question in questions %}
+        <tr>
+            <td>{{ question[1] }}</td>
+            <td>
+                <a href="{{url_for('question', id=question[0])}}">Responder</a>
+                <a href="#"><img width=10 src="{{ url_for('static', filename='/img/iconos/pencil.png') }}" alt="editar"></a>
+                <a href="#"><img width=10 src="{{ url_for('static', filename='/img/iconos/bin.png') }}" alt="borrar"></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p>Ir a <a href="{{url_for('index')}}">Inicio</a></p>
+</body>
+</html>

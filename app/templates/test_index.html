@@ -3,12 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Inicio</title>
+    <title>Inicio - App de Preguntas</title>
 </head>
 <body>
-    <h1> Pregunta </h1>
+    <h1>App de Preguntas</h1>
 
+    <h2>Crear Pregunta</h2>
     <p><a href="{{url_for('create')}}">Crear Pregunta</a></p>
+    <hr>
+    <h2>Ver Preguntas</h2>
+    <p><a href="{{url_for('questions')}}">Ver todas las Preguntas</a></p>
+    <hr>
+    <h2>Contestar Preguntas</h2>
     <p><a href="{{url_for('question', id=1)}}">Contestar Pregunta</a></p>
 </body>
 </html>

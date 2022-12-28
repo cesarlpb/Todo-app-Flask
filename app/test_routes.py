@@ -50,10 +50,24 @@ def create():
         return 'Método no permitido', 405 # 400 de Bad Request o 405 de método no permitido
 
 # Display all questions in db
-@app.route('/question')
+@app.route('/questions', methods=['GET'])
 def questions():
-    # Leer todas las preguntas que hay en db y sacarlas en una tabla
-    return "Mostrar preguntas"
+    # read tabke from database
+    try:
+        con = sql.connect(db_name)
+        c =  con.cursor() # cursor
+        # read data
+        c.execute(f"SELECT ID, Question FROM {db_table}")
+        questions = c.fetchall()   # tomamos todos los valores del select
+        con.commit() # apply changes
+        return render_template('test_questions.html', questions=questions)
+    except con.Error as err: # if error
+        # then display the error in 'database_error.html' page
+        return render_template('test_db_error.html', error=err)
+    finally:
+        con.close() # close the connection
+        
+    return render_template('test_questions.html', questions=questions)  # revisar
 
 # Display question
 @app.route('/question/<int:id>', methods=['GET', 'POST'])
@@ -65,11 +79,8 @@ def question(id):
             con = sql.connect(db_name)
             c =  con.cursor() # cursor
             # read question : SQLite index start from 1 (see index.html)
-            
-            id = 1 # revisar
-            # print(f"Select Question FROM {db_table} where id = {0}".format(id))
 
-            query = f"Select Question FROM {db_table} where id = 1"
+            query = f"Select Question FROM {db_table} where id = {id}"
             c.execute(query)
             question = c.fetchone() # fetch the data from cursor
             con.commit() # apply changes
@@ -81,7 +92,7 @@ def question(id):
         finally:
             con.close() # close the connection
 
-        return render_template('test_question.html', question=question)
+        return render_template('test_question.html', question=question) # revisar
     else: # request.method == 'POST':
         # read and check answers
         submitted_answer = request.form['answer']
@@ -92,7 +103,7 @@ def question(id):
             c =  con.cursor() # cursor
             # read answer : SQLite index start from 1 (see index.html)
             
-            query = f"Select Answer FROM {db_table} where id = 1" # revisar
+            query = f"Select Answer FROM {db_table} where id = {id}" # revisar
             # query = f"Select Answer FROM {db_table} where id = {0}".format(id)
 
             c.execute(query)
