@@ -1,0 +1,19 @@
+<!-- question.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pregunta</title>
+</head>
+<body>
+    <h1> {{ question }} </h1>
+
+    <form method='post'>
+        <b>Respuesta</b> <input type="text" name="answer"><br>
+        <input type="submit" name="submit" value="Enviar">
+        <input type="reset" name="reset" value="Borrar"><br>
+    </form>
+
+    <p>Ir a <a href="{{url_for('index')}}">Inicio</a></p>
+</body>
+</html>

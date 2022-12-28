@@ -1,0 +1,22 @@
+<!-- create.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear</title>
+</head>
+<body>
+    <h1> Crear Pregunta </h1>
+
+    <form method='post'>
+
+            <b>Pregunta</b> <input type="text" name="question"><br>
+            <b>Respuesta</b> <input type="text" name="answer"><br>
+
+            <input type="submit" name="submit" value="Enviar">
+            <input type="reset" name="reset" value="Borrar"><br>
+    </form>
+
+    <p>Go to <a href="{{url_for('index')}}">Inicio</a></p>
+</body>
+</html>
