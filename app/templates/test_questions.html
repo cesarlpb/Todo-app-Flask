@@ -12,14 +12,19 @@
         <tr>
             <th>Pregunta</th>
             <th>Respuesta</th>
+            <th colspan="2">Opciones</th>
         </tr>
         {% for question in questions %}
         <tr>
             <td>{{ question[1] }}</td>
             <td>
                 <a href="{{url_for('question', id=question[0])}}">Responder</a>
-                <a href="#"><img width=10 src="{{ url_for('static', filename='/img/iconos/pencil.png') }}" alt="editar"></a>
-                <a href="#"><img width=10 src="{{ url_for('static', filename='/img/iconos/bin.png') }}" alt="borrar"></a>
+            </td>
+            <td>
+                <a href="{{url_for('edit', id=question[0])}}" style="border: 1px solid black; color: black; padding: 0 10px; border-radius: 10px;"><img width=10 src="{{ url_for('static', filename='/img/iconos/pencil.png') }}" alt="editar"> Editar</a>
+            </td>
+            <td>
+                <a href="{{url_for('delete', id=question[0])}}" style="border: 1px solid black; color: black; padding: 0 10px; border-radius: 10px;"><img width=10 src="{{ url_for('static', filename='/img/iconos/bin.png') }}" alt="borrar"> Borrar</a>
             </td>
         </tr>
         {% endfor %}
