@@ -44,7 +44,7 @@ def create():
         finally:
             con.close() # close the connection
         
-        return render_template('test_create_thanks.html', question=question)
+        # return render_template('test_create_thanks.html', question=question)
 
     else:
         return 'Método no permitido', 405 # 400 de Bad Request o 405 de método no permitido
@@ -52,7 +52,7 @@ def create():
 # Display all questions in db
 @app.route('/questions', methods=['GET'])
 def questions():
-    # read tabke from database
+    # read from database
     try:
         con = sql.connect(db_name)
         c =  con.cursor() # cursor
@@ -66,8 +66,8 @@ def questions():
         return render_template('test_db_error.html', error=err)
     finally:
         con.close() # close the connection
-        
-    return render_template('test_questions.html', questions=questions)  # revisar
+    
+    # return render_template('test_questions.html', questions=questions)  # revisar
 
 # Display question
 @app.route('/question/<int:id>', methods=['GET', 'POST'])
@@ -79,7 +79,6 @@ def question(id):
             con = sql.connect(db_name)
             c =  con.cursor() # cursor
             # read question : SQLite index start from 1 (see index.html)
-
             query = f"Select Question FROM {db_table} where id = {id}"
             c.execute(query)
             question = c.fetchone() # fetch the data from cursor
@@ -126,17 +125,82 @@ def question(id):
 # Edit question
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
-    # si el campo que nos envían no tiene valor None o "" entonces no se actualiza
-    # question = ""
-    # answer = ""
+    
     # if request.form['question'] != None or request.form['question'] != "":
     # update test set question = question, answer = answer where id = id
     # html -> id
-    pass
+    if request.method == 'GET':
+        try:
+            con = sql.connect(db_name)
+            c =  con.cursor()
+            c.execute(f"SELECT * FROM {db_table} WHERE id = {id}")
+            id, question, answer = c.fetchone() # current values for id, question, answer
+            con.commit()
+            return render_template('test_edit.html', id=id, question=question, answer=answer)
+        except con.Error as err: # if error
+            # then display the error in 'database_error.html' page
+            return render_template('test_db_error.html', error=err)
+        finally:
+            con.close()
+    elif request.method == 'POST':
+        # id MUST NOT be changed
+            # We store values from form
+        new_question = request.form['question']
+        new_answer = request.form['answer']
+        
+        # We read current values from database
+        try:
+            con = sql.connect(db_name)
+            c =  con.cursor()
+            c.execute(f"SELECT Question, Answer FROM {db_table} WHERE id = {id}")
+            question, answer = c.fetchone() # current values for id, question, answer
+            con.commit()
+        except con.Error as err: # if error
+            # then display the error in 'database_error.html' page
+            return render_template('test_db_error.html', error=err)
+        finally:
+            con.close()
+        
+        # We validate NOT to have empty fields for update
+        if new_question != None or new_question != "":
+            question = new_question
+        if new_answer != None or new_answer != "":
+            answer = new_answer
+        
+        # Finally, we update the database
+        try:
+            con = sql.connect(db_name)
+            c =  con.cursor() # cursor
+            
+            print(f"UPDATE {db_table} SET Question={question}, Answer={answer} WHERE id = {id}")
+            c.execute(f"UPDATE {db_table} SET Question={question}, Answer={answer} WHERE id = {id}")
+            con.commit() # apply changes
+
+            # Reading data to display in thanks page
+            c.execute(f"SELECT Question, Answer FROM {db_table} WHERE id = {id}")
+            question, answer = c.fetchone() # current values for id, question, answer
+            print(question, answer)
+            con.commit()
+            # go to thanks page
+            return render_template('test_edit_thanks.html', id=id, question=question, answer=answer)
+        except con.Error as err: # if error
+            # then display the error in 'database_error.html' page
+            return render_template('test_db_error.html', error=err)
+        finally:
+            con.close() # close the connection
 # Delete question
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
-    # delete from test where id = id
     # html thanks page -> id
         # "Se ha borrado la pregunta con id: id" 
-    pass
+    try:
+        con = sql.connect(db_name)
+        c =  con.cursor() # cursor
+        c.execute(f"DELETE FROM {db_table} WHERE id = {id}")
+        con.commit() # apply changes
+        return render_template('test_delete_thanks.html', id = id)
+    except con.Error as err: # if error
+        # then display the error in 'database_error.html' page
+        return render_template('test_db_error.html', error=err)
+    finally:
+        con.close() # close the connection
