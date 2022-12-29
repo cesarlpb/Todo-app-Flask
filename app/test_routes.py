@@ -172,14 +172,14 @@ def edit(id):
             con = sql.connect(db_name)
             c =  con.cursor() # cursor
             
-            print(f"UPDATE {db_table} SET Question={question}, Answer={answer} WHERE id = {id}")
-            c.execute(f"UPDATE {db_table} SET Question={question}, Answer={answer} WHERE id = {id}")
+            # print(f"UPDATE {db_table} SET Question={question}, Answer={answer} WHERE id = {id}")
+            c.execute(f"UPDATE {db_table} SET Question='{question}', Answer='{answer}' WHERE id = {id}")
             con.commit() # apply changes
 
             # Reading data to display in thanks page
             c.execute(f"SELECT Question, Answer FROM {db_table} WHERE id = {id}")
             question, answer = c.fetchone() # current values for id, question, answer
-            print(question, answer)
+            # print(question, answer)
             con.commit()
             # go to thanks page
             return render_template('test_edit_thanks.html', id=id, question=question, answer=answer)
