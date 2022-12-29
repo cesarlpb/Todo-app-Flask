@@ -122,3 +122,21 @@ def question(id):
                 answer = correct_answer,
                 yourAnswer = submitted_answer
             )
+
+# Edit question
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    # si el campo que nos envían no tiene valor None o "" entonces no se actualiza
+    # question = ""
+    # answer = ""
+    # if request.form['question'] != None or request.form['question'] != "":
+    # update test set question = question, answer = answer where id = id
+    # html -> id
+    pass
+# Delete question
+@app.route('/delete/<int:id>', methods=['GET', 'POST'])
+def delete(id):
+    # delete from test where id = id
+    # html thanks page -> id
+        # "Se ha borrado la pregunta con id: id" 
+    pass
