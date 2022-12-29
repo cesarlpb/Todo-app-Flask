@@ -133,3 +133,5 @@ dmypy.json
 # DB de SQLite
 *.db
 *.sqlite3
+app/*.db
+app/*.sqlite3
