@@ -60,6 +60,14 @@ def login():
             error = 'Hay algún dato incorrecto. Vuelve a intentarlo.'
     return render_template("login.html", error=error)
 
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    session.pop('id', None)
+    session.pop('username', None)
+    session['logout_msg'] = "Has salido de sesión."
+    return render_template('login.html', logout_msg=session['logout_msg']) # redirect to login page
+
 # Registro de usuario
 @app.route("/register", methods =['GET', 'POST'])
 def register():
