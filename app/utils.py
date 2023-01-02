@@ -16,26 +16,24 @@ def create_table_if_not_exist(db_name : str, db_table : str):
         con.close()
 
 # Register new user
-def register_user(db_name : str, db_table : str, username : str, email : str, password : str) -> tuple[bool, str] | tuple[sql.Error, None]:
+def register_user(db_name : str, db_table : str, username : str, email : str, password : str) -> tuple[bool, str, bool] | tuple[sql.Error, None, bool]:
     """
        Registra un nuevo usuario en la base de datos.
 
         Args: db_name (str): nombre de la base de datos
-             db_table (str): nombre de la tabla
-             username (str): nombre de usuario
-             email (str): email del usuario
-             password (str): contraseña del usuario
-        Returns: True si el usuario se registró correctamente
-                 False si el usuario ya existe 
+             db_table (str): nombre de la tabla, username (str): nombre de usuario, email (str): email del usuario, password (str): contraseña del usuario
+        Returns: True si el usuario se registró correctamente, False si el usuario ya existe 
                  Error si hubo un error al registrar el usuario
+                 msg -> mensaje de warning
+                 es_warning -> booleano que indica si es un warning o no
     """
     try:
         con = sql.connect(db_name)
         c = con.cursor()
         # Hacemos SELECT para ver si el user existe -> email o username
         c.execute(f"SELECT * FROM {db_table} WHERE username = '{username}' OR email = '{email}'")
-        account = c.fetchone() # (1, 'email@domain.com', 'password', 'pepito')
-                               # None
+        account = c.fetchone() # (1, 'email@domain.com', 'password', 'pepito') # None
+        es_warning = True
         print(account)
         if account:
             # Si el usuario ya existe, entonces no se registra
@@ -53,16 +51,17 @@ def register_user(db_name : str, db_table : str, username : str, email : str, pa
         elif not username or not password or not email:
             msg = 'Por favor, rellena todos los campos del formulario'
         else:
-            print(f'INSERT INTO {db_table} (email, password, username) VALUES (?, ?, ?)' , (email, password, username))
+            # print(f'INSERT INTO {db_table} (email, password, username) VALUES (?, ?, ?)' , (email, password, username))
             c.execute(f'INSERT INTO {db_table} (Email, Password, Username) VALUES (?, ?, ?)' , (email, password, username))
             con.commit()
             msg = f'Se ha registrado correctamente el usuario: {username}'
-        return (True, msg)
+            es_warning = False
+            return (True, msg, es_warning)
     except con.Error as err:
-        print(err)
-        return (err, None)
+        return (err, None, False)
     finally:
         con.close()
+    return (False, msg, es_warning)
 # Log user
 def login_user(db_name : str, db_table : str, values : list[str, str]):
     pass

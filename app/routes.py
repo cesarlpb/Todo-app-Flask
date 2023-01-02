@@ -57,12 +57,15 @@ def register():
         # password2 = request.form['password2']
 
         # store in database
-        can_register_user, msg = register_user(db_name, db_table, username, email, password)
+        can_register_user, msg, es_warning = register_user(db_name, db_table, username, email, password)
         # revisar
-        if can_register_user:
-            return render_template('register_thanks.html', username=username, msg=msg)
+        if isinstance(can_register_user, bool) and can_register_user:
+            return render_template('register_thanks.html', username=username, msg=msg, es_warning=es_warning) # es_warning = False
+        elif isinstance(can_register_user, bool) and not can_register_user:
+            return render_template('register.html', error=f"{msg}\nUsuario no registrado. Vuelve a intentarlo", es_warning=es_warning) # es_warning = True
         else:
-            return render_template('register.html', error="Usuario no registrado. Vuelve a intentarlo")
+            con_error = can_register_user
+            return render_template('register.html', error=f"{con_error}\nUsuario no registrado. Vuelve a intentarlo", es_warning=False)
     elif request.method == 'POST':
         msg = "Por favor, rellena todos los campos"
     return render_template('register.html', msg=msg)

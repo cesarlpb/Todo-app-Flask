@@ -5,9 +5,14 @@
 <section id="register" class="py-5 d-flex align-items-center">
     <div class="col-4 mx-auto text-white">
         <h2 class="text-center text-white">Registro</h2>
-        {% if error %}
-        <div class="col">
-        <p class="text-danger">{{ error }}</p>
+        {% if error and es_warning %}
+        <div class="col bg bg-warning p-2 my-2">
+        <p class="text-white">{{ error }}</p>
+        </div>
+        {% endif %}
+        {% if error and not es_warning %}
+        <div class="col bg bg-danger p-2 my-2">
+        <p class="text-white">{{ error }}</p>
         </div>
         {% endif %}
         <form action="{{ url_for('register') }}" method="post">
