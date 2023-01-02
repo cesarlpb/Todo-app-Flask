@@ -14,6 +14,16 @@ def create_table_if_not_exist(db_name : str, db_table : str):
     finally:
         con.close()
 
+# Register new user
+def register_user(db_name : str, db_table : str, values : list[str, str, str]):
+    pass
+# Log user
+def login_user(db_name : str, db_table : str, values : list[str, str]):
+    pass
+# Log out user
+def logout_user(db_name : str, db_table : str, values : list[str, str]):
+    pass
+
 # Read from db functions
 def read_from_db(db_name : str, db_table : str, cols : list, id : int):
     # si no recibe id, entonces devuelve todos los registros
