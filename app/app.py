@@ -8,6 +8,28 @@ app = Flask(__name__)
 def index():
     return render_template("home.html")
 
+# Pasos:
+## Registro:
+    # 1. Crear formulario de registro
+        # condiciones sobre la contraseña
+            # pedir repetir contraseña y comprobar si son iguales
+        # condiciones sobre el usuario
+        # validar email ?
+    # 2. Ruta -> /register
+    # 3. Validar datos -> en la base de datos -> no repetir usuario
+    # 4. Si es correcto -> redirigir a /profile o a /login o a /
+## Login:
+    # 1. Crear formulario de login
+    # 2. Ruta -> /login
+    # 3. Validar datos -> en la base de datos
+        # usar session para guardar el usuario logeado
+    # 4. Si es correcto -> redirigir a /profile
+
+## Una vez el usuario logea -> puede acceder a las rutas de los todos
+    # Si no ha logeado solo puede ver /, /login, /register
+
+# Conexiones a bd de SQLite3 con utils.py
+
 # Inicio de sesión o login
 @app.route("/login")
 def login():
@@ -62,4 +84,4 @@ def page_not_found(e):
 
 # 5000 - cambiar puerto a uno que esté libre
 if __name__ == '__main__':
-   app.run(host="0.0.0.0", port=5000, debug = True)
+   app.run(host="0.0.0.0", port=5019, debug = True)
