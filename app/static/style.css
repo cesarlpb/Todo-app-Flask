@@ -163,3 +163,6 @@ footer h4, footer p{
 .my-btn {
     width: 150px;
 }
+#mybtn1:hover, #mybtn2:hover {
+    color: white!important;
+}

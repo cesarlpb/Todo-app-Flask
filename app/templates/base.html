@@ -13,9 +13,12 @@
 </head>
 <html>
     <body>
+    {% include 'navbar.html' %}
+    
     {% block main %}
     {% endblock %}
-    </body>
+    
     <!-- si queremos quitar footer de /login y /register añadimos if -->
     {% include 'footer.html' %}
+    </body>
 </html>

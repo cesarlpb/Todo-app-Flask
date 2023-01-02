@@ -21,19 +21,21 @@ def index():
 
 ## Registro:
     # X Crear formulario de registro
-        # condiciones sobre la contraseña
-            # pedir repetir contraseña y comprobar si son iguales
-        # condiciones sobre el usuario
-        # validar email ?
+        # X condiciones sobre la contraseña
+            # pending pedir repetir contraseña y comprobar si son iguales
+        # X condiciones sobre el usuario - no se repite
+        # X validar email - regex
     # X Ruta -> /register
-    # 3. Validar datos -> en la base de datos -> no repetir usuario
-    # 4. Si es correcto -> redirigir a /profile o a /login o a /
+    # X Validar datos -> en la base de datos -> no repetir usuario
+    # X Si es correcto -> redirigir a /profile o a /login o a /
 ## Login:
     # X Crear formulario de login
     # X Ruta -> /login
-    # 3. Validar datos -> en la base de datos
-        # usar session para guardar el usuario logeado
-    # 4. Si es correcto -> redirigir a /profile
+    # X Validar datos -> en la base de datos
+        # X usar session para guardar el usuario logeado
+    # X 4. Si es correcto -> redirigir a /profile
+
+    # X Colocar logout
 
 ## Una vez el usuario logea -> puede acceder a las rutas de los todos
     # Si no ha logeado solo puede ver /, /login, /register
