@@ -33,12 +33,12 @@ def index():
 # Inicio de sesión o login
 @app.route("/login")
 def login():
-    return "Login"
+    return render_template("login.html")
 
 # Registro de usuario
 @app.route("/register")
 def register():
-    return "Register"
+    return render_template("register.html")
 
 # Perfil de usuario
 @app.route("/profile")
