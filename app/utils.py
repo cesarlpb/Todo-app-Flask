@@ -3,11 +3,33 @@ import sqlite3 as sql
 import re
 
 # Create table if not exist
-def create_table_if_not_exist(db_name : str, db_table : str):
+def create_tables_if_not_exist(db_name : str, db_table : str, todos_table : str) -> bool | sql.Error:
     try:
         con = sql.connect(db_name)
         c = con.cursor()
+        # Start a transaction
+        c.execute('BEGIN')
         c.execute(f"CREATE TABLE IF NOT EXISTS {db_table} (Id INTEGER PRIMARY KEY AUTOINCREMENT, Email TEXT, Password TEXT, Username TEXT)")
+        # c.execute(f"CREATE TABLE IF NOT EXISTS {todos_table} (Id INTEGER PRIMARY KEY AUTOINCREMENT,Title TEXT,Description TEXT,Done INTEGER,CreateAt DATETIME DEFAULT CURRENT_TIMESTAMP,ModifiedAt DATETIME DEFAULT CURRENT_TIMESTAMP,DueDate DATETIME DEFAULT CURRENT_TIMESTAMP,UserId INTEGER,FOREIGN KEY(UserId) REFERENCES {db_table}(Id)")
+        
+        # revisar - DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
+
+        c.execute("""CREATE TABLE IF NOT EXISTS todos (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            Title TEXT,
+            Description TEXT,
+            Done INTEGER,
+            CreateAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+            ModifiedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+            DueDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+            UserId INTEGER,
+            FOREIGN KEY(UserId) REFERENCES users(Id)
+            )""")
+
+        c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title11', 'description11', 0, 1)")
+        c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title21', 'description21', 0, 1)")
+        c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title31', 'description31', 0, 1)")
+        # c.execute(f"CREATE TABLE IF NOT EXISTS {todos_table} (Id INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, Description TEXT, Done INTEGER, CreateAt DEFAULT CURRENT_TIMESTAMP, ModifiedAt DEFAULT CURRENT_TIMESTAMP, DueDate DATETIME DEFAULT DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 DAY), UserId INTEGER, FOREIGN KEY(UserId) REFERENCES {db_table}(Id))")
         con.commit()
         return True
     except con.Error as err:
@@ -76,10 +98,21 @@ def login_user(db_name : str, db_table : str, username : str, password : str) ->
         con.close()
     return None
 # Log out user
-def logout_user(db_name : str, db_table : str, values : list[str, str]):
-    pass
+# def logout_user(db_name : str, db_table : str, values : list[str, str]):
+#     pass
 
 # Read from db functions
+def read_all_todos(db_name : str, db_table : str, user_id : int) -> list[tuple] | None | sql.Error:
+    try:
+        con = sql.connect(db_name)
+        c = con.cursor()
+        c.execute(f"SELECT * FROM {db_table} WHERE Id = {user_id}")
+        todos = c.fetchall() # lista o []
+        if todos:
+            return todos
+        return None # revisar -> anotación lista []
+    except con.Error as err:
+        return err
 def read_from_db(db_name : str, db_table : str, cols : list, id : int):
     # si no recibe id, entonces devuelve todos los registros
     # si recibe id, entonces devuelve el registro con ese id

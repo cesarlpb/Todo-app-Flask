@@ -8,7 +8,8 @@ app.secret_key = 'your secret key'
 
 db_name = 'todo.db'
 db_table = 'users'
-create_table_if_not_exist(db_name, db_table) # add validation to show error if table not created
+todos_table = 'todos'
+create_tables_if_not_exist(db_name, db_table, todos_table) # add validation to show error if table not created
 # Página de inicio o landing page
 @app.route("/")
 def index():
@@ -109,7 +110,10 @@ def profile():
 # Debe estar logeado -> ruta para ver TODAS las notas del usuario
 @app.route("/todos")
 def get_all_todos():
-    return "All Todos"
+    todos = read_all_todos(db_name, todos_table, session['id'])
+    for todo in todos:
+        print(todo)  # revisar por qué sale solo uno en ruta ver mis notas
+    return render_template('todos.html', todos=todos, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Debe estar logeado -> ruta para ver UNA nota del usuario
 @app.route("/todos/<int:id>")
