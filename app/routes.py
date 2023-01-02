@@ -57,9 +57,10 @@ def register():
         # password2 = request.form['password2']
 
         # store in database
-        can_register_user = register_user(db_name, db_table, username, email, password)
+        can_register_user, msg = register_user(db_name, db_table, username, email, password)
+        # revisar
         if can_register_user:
-            return render_template('register_thanks.html', username=username, msg="Usuario registrado correctamente")
+            return render_template('register_thanks.html', username=username, msg=msg)
         else:
             return render_template('register.html', error="Usuario no registrado. Vuelve a intentarlo")
     elif request.method == 'POST':

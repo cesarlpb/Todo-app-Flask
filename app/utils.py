@@ -33,14 +33,15 @@ def register_user(db_name : str, db_table : str, username : str, email : str, pa
         con = sql.connect(db_name)
         c = con.cursor()
         # Hacemos SELECT para ver si el user existe -> email o username
-        c.execute(f'SELECT * FROM {db_table} WHERE username = % s OR email = % s' , (username, email))
+        c.execute(f"SELECT * FROM {db_table} WHERE username = '{username}' OR email = '{email}'")
         account = c.fetchone() # (1, 'email@domain.com', 'password', 'pepito')
                                # None
+        print(account)
         if account:
             # Si el usuario ya existe, entonces no se registra
                 # Se puede definir si es el username o el email lo que ya existe pero
                 # a veces se deja ambiguo a propósito para evitar ataques de fuerza bruta
-            msg = 'El email o username ya existen. Vuelve a intentarlo.'
+            msg = 'El email o username ya existen. Vuelve a intentarlo'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             msg = 'Email incorrecto'
         elif not re.match(r'[A-Za-z0-9]+', username):
@@ -52,11 +53,13 @@ def register_user(db_name : str, db_table : str, username : str, email : str, pa
         elif not username or not password or not email:
             msg = 'Por favor, rellena todos los campos del formulario'
         else:
-            c.execute(f'INSERT INTO {db_table} (email, password, username) VALUES (% s, % s, % s)' , (email, password, username))
+            print(f'INSERT INTO {db_table} (email, password, username) VALUES (?, ?, ?)' , (email, password, username))
+            c.execute(f'INSERT INTO {db_table} (Email, Password, Username) VALUES (?, ?, ?)' , (email, password, username))
             con.commit()
             msg = f'Se ha registrado correctamente el usuario: {username}'
         return (True, msg)
     except con.Error as err:
+        print(err)
         return (err, None)
     finally:
         con.close()
