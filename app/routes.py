@@ -46,9 +46,10 @@ def login():
 # Registro de usuario
 @app.route("/register", methods =['GET', 'POST'])
 def register():
+    msg = ""
     if request.method == 'GET':
         return render_template("register.html")
-    elif request.method == 'POST':
+    elif request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
         # read data from the form and save in variable
         username = request.form['username']
         email = request.form['email']
@@ -61,6 +62,9 @@ def register():
             return render_template('register_thanks.html', username=username, msg="Usuario registrado correctamente")
         else:
             return render_template('register.html', error="Usuario no registrado. Vuelve a intentarlo")
+    elif request.method == 'POST':
+        msg = "Por favor, rellena todos los campos"
+    return render_template('register.html', msg=msg)
 # Perfil de usuario
 @app.route("/profile")
 def profile():

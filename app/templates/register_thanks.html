@@ -4,9 +4,10 @@
 <section id="register" class="py-5 d-flex align-items-center">
     <div class="col-4 mx-auto text-white">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 text-center">
                 <h2 class="text-center text-white">{{ msg }}: {{ username }}</h2>
                 <p class="text-center text-white">Ahora puedes iniciar sesión</p>
+                <a class="btn btn-primary d-inline-block mx-auto" href="{{url_for('login')}}">Login</a>
             </div>
         </div>
     </div>

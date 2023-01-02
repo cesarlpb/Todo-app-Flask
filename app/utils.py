@@ -1,5 +1,6 @@
 #%% utils.py
 import sqlite3 as sql
+import re
 
 # Create table if not exist
 def create_table_if_not_exist(db_name : str, db_table : str):
@@ -15,8 +16,50 @@ def create_table_if_not_exist(db_name : str, db_table : str):
         con.close()
 
 # Register new user
-def register_user(db_name : str, db_table : str, values : list[str, str, str]):
-    pass
+def register_user(db_name : str, db_table : str, username : str, email : str, password : str) -> tuple[bool, str] | tuple[sql.Error, None]:
+    """
+       Registra un nuevo usuario en la base de datos.
+
+        Args: db_name (str): nombre de la base de datos
+             db_table (str): nombre de la tabla
+             username (str): nombre de usuario
+             email (str): email del usuario
+             password (str): contraseña del usuario
+        Returns: True si el usuario se registró correctamente
+                 False si el usuario ya existe 
+                 Error si hubo un error al registrar el usuario
+    """
+    try:
+        con = sql.connect(db_name)
+        c = con.cursor()
+        # Hacemos SELECT para ver si el user existe -> email o username
+        c.execute(f'SELECT * FROM {db_table} WHERE username = % s OR email = % s' , (username, email))
+        account = c.fetchone() # (1, 'email@domain.com', 'password', 'pepito')
+                               # None
+        if account:
+            # Si el usuario ya existe, entonces no se registra
+                # Se puede definir si es el username o el email lo que ya existe pero
+                # a veces se deja ambiguo a propósito para evitar ataques de fuerza bruta
+            msg = 'El email o username ya existen. Vuelve a intentarlo.'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Email incorrecto'
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            msg = 'El username debe ser alfanumérico'
+        elif len(password) < 5:
+            # Podemos colocar varias condiciones sobre la contraseña
+            # para que no sea una contraseña débil
+            msg = 'La contraseña debe tener al menos 5 caracteres'
+        elif not username or not password or not email:
+            msg = 'Por favor, rellena todos los campos del formulario'
+        else:
+            c.execute(f'INSERT INTO {db_table} (email, password, username) VALUES (% s, % s, % s)' , (email, password, username))
+            con.commit()
+            msg = f'Se ha registrado correctamente el usuario: {username}'
+        return (True, msg)
+    except con.Error as err:
+        return (err, None)
+    finally:
+        con.close()
 # Log user
 def login_user(db_name : str, db_table : str, values : list[str, str]):
     pass
