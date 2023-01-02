@@ -109,7 +109,7 @@ h3 {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* Seccióin Home */
+/* Sección Home */
 
 #home{
     background-image: linear-gradient(to right, #0FDBDB, #0875D8);
@@ -122,7 +122,28 @@ h3 {
     width: 100;
     -webkit-clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
     clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+    border-bottom: 1px solid white;
 }
+#home, #triangulo {
+    background-color: white;
+    margin-bottom: 0;
+    padding-bottom: 0px;
+    border-bottom: 2px solid white;
+}
+/* revisar línea entre triángulo y #about */
+/* Sections */
+#about {
+    background-color: white;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid white;
+}
+#login {
+    height: 100vh;
+    background-image: linear-gradient(to right, #0FDBDB, #0875D8);
+}
+
+
 .boton{
     background-color: white;
 }
