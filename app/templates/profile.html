@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<section id="profile" class="py-5 d-flex align-items-center">
+    <div class="container col-4 mx-auto">
+        <h1 class="text-white">Bienvenido, {{ username }}</h1>
+        <div class="col bg bg-success p-2 my-2">
+            <p class="text-white">{{ msg }}</p>
+        </div>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic voluptate dolores eveniet distinctio molestias commodi at laboriosam esse itaque, modi vitae. Facere laborum sed, in similique quae error ab suscipit.</p>
+    </div>
+</section>
+{% endblock %}

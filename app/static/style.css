@@ -138,7 +138,7 @@ h3 {
     padding-top: 0;
     border-top: 1px solid white;
 }
-#login, #register {
+#login, #register, #profile {
     height: 100vh;
     background-image: linear-gradient(to right, #0FDBDB, #0875D8);
 }

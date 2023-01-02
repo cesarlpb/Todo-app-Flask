@@ -34,7 +34,6 @@ def register_user(db_name : str, db_table : str, username : str, email : str, pa
         c.execute(f"SELECT * FROM {db_table} WHERE username = '{username}' OR email = '{email}'")
         account = c.fetchone() # (1, 'email@domain.com', 'password', 'pepito') # None
         es_warning = True
-        print(account)
         if account:
             # Si el usuario ya existe, entonces no se registra
                 # Se puede definir si es el username o el email lo que ya existe pero
@@ -63,8 +62,19 @@ def register_user(db_name : str, db_table : str, username : str, email : str, pa
         con.close()
     return (False, msg, es_warning)
 # Log user
-def login_user(db_name : str, db_table : str, values : list[str, str]):
-    pass
+def login_user(db_name : str, db_table : str, username : str, password : str) -> tuple[int, str, str, str] | None:
+    try:
+        con = sql.connect(db_name)
+        c = con.cursor()
+        c.execute(f"SELECT * FROM {db_table} WHERE username = '{username}' AND password = '{password}'")
+        account = c.fetchone() # (1, 'email@domain.com', 'password', 'pepito') # None
+        if account:
+            return account
+    except con.Error as err:
+        return (err, None, False)
+    finally:
+        con.close()
+    return None
 # Log out user
 def logout_user(db_name : str, db_table : str, values : list[str, str]):
     pass

@@ -1,8 +1,10 @@
 # routes.py
 import sqlite3 as sql # -> quitar import
 from app import app
-from flask import render_template, request
+from flask import render_template, request, session, redirect, url_for
 from utils import *
+
+app.secret_key = 'your secret key' 
 
 db_name = 'todo.db'
 db_table = 'users'
@@ -39,9 +41,24 @@ def index():
 # Conexiones a bd de SQLite3 con utils.py
 
 # Inicio de sesión o login
-@app.route("/login")
+@app.route("/login", methods =['GET', 'POST'])
 def login():
-    return render_template("login.html")
+    msg = ""
+    if request.method == 'GET':
+        return render_template("login.html")
+    elif request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        account = login_user(db_name, db_table, username, password) # (1, 'test@test.test', '12345', 'test1') o None
+        if account:
+            session['logged_in'] = True
+            session['id'] = account[0] # id
+            session['username'] = account[-1] # username
+            return redirect(url_for('profile', username = session['username']))
+            # return render_template('profile.html', msg = msg, username = session['username'])
+        else:
+            error = 'Hay algún dato incorrecto. Vuelve a intentarlo.'
+    return render_template("login.html", error=error)
 
 # Registro de usuario
 @app.route("/register", methods =['GET', 'POST'])
@@ -72,7 +89,7 @@ def register():
 # Perfil de usuario
 @app.route("/profile")
 def profile():
-    return "Profile"
+    return render_template('profile.html', username = session['username'], msg='Has iniciado sesión correctamente !')
 
 # Gestión de notas -> CRUD
     # Create -> Crear nota
