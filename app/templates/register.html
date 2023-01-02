@@ -5,6 +5,11 @@
 <section id="register" class="py-5 d-flex align-items-center">
     <div class="col-4 mx-auto text-white">
         <h2 class="text-center text-white">Registro</h2>
+        {% if error %}
+        <div class="col">
+        <p class="text-danger">{{ error }}</p>
+        </div>
+        {% endif %}
         <form action="{{ url_for('register') }}" method="post">
             <div class="form-group">
                 <label for="email">Email</label>

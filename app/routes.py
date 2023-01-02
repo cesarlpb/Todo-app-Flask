@@ -14,6 +14,9 @@ def index():
     return render_template("home.html")
 
 # Pasos:
+
+# X Crear tabla users
+
 ## Registro:
     # X Crear formulario de registro
         # condiciones sobre la contraseña
@@ -41,10 +44,23 @@ def login():
     return render_template("login.html")
 
 # Registro de usuario
-@app.route("/register")
+@app.route("/register", methods =['GET', 'POST'])
 def register():
-    return render_template("register.html")
+    if request.method == 'GET':
+        return render_template("register.html")
+    elif request.method == 'POST':
+        # read data from the form and save in variable
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        # password2 = request.form['password2']
 
+        # store in database
+        can_register_user = register_user(db_name, db_table, username, email, password)
+        if can_register_user:
+            return render_template('register_thanks.html', username=username, msg="Usuario registrado correctamente")
+        else:
+            return render_template('register.html', error="Usuario no registrado. Vuelve a intentarlo")
 # Perfil de usuario
 @app.route("/profile")
 def profile():
