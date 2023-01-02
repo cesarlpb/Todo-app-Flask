@@ -12,7 +12,10 @@
                 <a id="mybtn1" class="mybtn nav-link btn btn-outline-secondary" href="{{ url_for('index') }}">Inicio<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item d-inline-block mx-5">
-                    <a id="mybtn2" class="nav-link btn btn-danger text-white" href="{{ url_for('logout') }}">Logout</a>
+                  <a id="mybtn2" class="nav-link btn btn-warning text-white" href="{{ url_for('profile') }}">Perfil</a>
+                </li>
+                <li class="nav-item d-inline-block mx-5">
+                    <a id="mybtn3" class="nav-link btn btn-danger text-white" href="{{ url_for('logout') }}">Logout</a>
                 </li>
             </ul>
         {% else %}

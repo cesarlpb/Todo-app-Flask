@@ -7,8 +7,33 @@
         <div class="col bg bg-success p-2 my-2">
             <p class="text-white">{{ msg }}</p>
         </div>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic voluptate dolores eveniet distinctio molestias commodi at laboriosam esse itaque, modi vitae. Facere laborum sed, in similique quae error ab suscipit.</p>
-        <a href="{{ url_for('logout') }}" class="btn btn-danger">Cerrar sesión</a>
+        <hr>
+        <h2 class="text-white">Mis Notas</h2>
+        <div class="row p-2 my-2 text-center">
+            <div class="col-6">
+                <a href="{{ url_for('get_all_todos') }}" class="btn btn-primary">Ver mis notas</a>
+            </div>
+            <div class="col-6">
+                <a href="{{ url_for('create_todo') }}" class="btn btn-success">Crear nota</a>
+            </div>
+        </div>
+        <hr>
+        <h2 class="text-white">Editar Perfil</h2>
+        <div class="row p-2 my-2 text-center">
+            <div class="col-4">
+                <a href="#" class="btn btn-primary">Editar username</a>
+            </div>
+            <div class="col-4">
+                <a href="#" class="btn btn-primary">Editar contraseña</a>
+            </div>
+            <div class="col-4">
+                <a href="#" class="btn btn-primary">Editar email</a>
+            </div>
+        </div>
+        <hr>
+        <div class="row p-2 my-2 text-center">
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Cerrar sesión</a>
+        </div>  
     </div>
 </section>
 {% endblock %}
