@@ -6,7 +6,8 @@
         <div class="row">
             <div class="col-12 text-center">
                 <h2 class="text-center text-white">{{ msg }}: {{ username }}</h2>
-                <p class="text-center text-white">Ahora puedes iniciar sesión</p>
+                <!-- <p class="text-center text-white">Ahora puedes iniciar sesión</p> -->
+                    <!-- Colocar if para que si no se registra correctamente, aparezca mensaje como danger -->
                 <a class="btn btn-primary d-inline-block mx-auto" href="{{url_for('login')}}">Login</a>
             </div>
         </div>
