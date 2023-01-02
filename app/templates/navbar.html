@@ -6,17 +6,28 @@
     </button>
 
     <div class="collapse navbar-collapse d-flex justify-content-end mr-5" id="navbarsExample04">
-      <ul class="navbar-nav mr-5">
-        <li class="nav-item actived-inline-block mx-5">
-          <a id="mybtn1" class="mybtn nav-link btn btn-outline-secondary" href="{{ url_for('index') }}">Inicio<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item d-inline-block mx-5">
-            <a id="mybtn2" class="nav-link btn btn-outline-primary text-primary" href="{{ url_for('login') }}">Login</a>
-        </li>
-        <li class="nav-item d-inline-block mx-5">
-            <a class="nav-link btn btn-primary text-white" href="{{ url_for('register') }}">Registro</a>
-        </li>
-      </ul>
+        {% if logged_in %}
+            <ul class="navbar-nav mr-5">
+                <li class="nav-item actived-inline-block mx-5">
+                <a id="mybtn1" class="mybtn nav-link btn btn-outline-secondary" href="{{ url_for('index') }}">Inicio<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item d-inline-block mx-5">
+                    <a id="mybtn2" class="nav-link btn btn-danger text-white" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        {% else %}
+            <ul class="navbar-nav mr-5">
+                <li class="nav-item actived-inline-block mx-5">
+                <a id="mybtn1" class="mybtn nav-link btn btn-outline-secondary" href="{{ url_for('index') }}">Inicio<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item d-inline-block mx-5">
+                    <a id="mybtn2" class="nav-link btn btn-outline-primary text-primary" href="{{ url_for('login') }}">Login</a>
+                </li>
+                <li class="nav-item d-inline-block mx-5">
+                    <a class="nav-link btn btn-primary text-white" href="{{ url_for('register') }}">Registro</a>
+                </li>
+            </ul>
+        {% endif %}
       <!-- <form class="form-inline my-2 my-md-0">
         <input class="form-control" type="text" placeholder="Search">
       </form> -->

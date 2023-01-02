@@ -9,11 +9,10 @@ app.secret_key = 'your secret key'
 db_name = 'todo.db'
 db_table = 'users'
 create_table_if_not_exist(db_name, db_table) # add validation to show error if table not created
-
 # Página de inicio o landing page
 @app.route("/")
 def index():
-    return render_template("home.html")
+    return render_template("home.html", logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Pasos:
 
@@ -47,7 +46,7 @@ def index():
 def login():
     msg = ""
     if request.method == 'GET':
-        return render_template("login.html")
+        return render_template("login.html", logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
     elif request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
@@ -60,7 +59,7 @@ def login():
             # return render_template('profile.html', msg = msg, username = session['username'])
         else:
             error = 'Hay algún dato incorrecto. Vuelve a intentarlo.'
-    return render_template("login.html", error=error)
+    return render_template("login.html", error=error, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 @app.route('/logout')
 def logout():
@@ -68,14 +67,14 @@ def logout():
     session.pop('id', None)
     session.pop('username', None)
     session['logout_msg'] = "Has salido de sesión."
-    return render_template('login.html', logout_msg=session['logout_msg']) # redirect to login page
+    return render_template('login.html', logout_msg=session['logout_msg'], logged_in = bool(session['logged_in']) if 'logged_in' in session else False) # redirect to login page
 
 # Registro de usuario
 @app.route("/register", methods =['GET', 'POST'])
 def register():
     msg = ""
     if request.method == 'GET':
-        return render_template("register.html")
+        return render_template("register.html", logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
     elif request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
         # read data from the form and save in variable
         username = request.form['username']
@@ -87,19 +86,19 @@ def register():
         can_register_user, msg, es_warning = register_user(db_name, db_table, username, email, password)
         # revisar
         if isinstance(can_register_user, bool) and can_register_user:
-            return render_template('register_thanks.html', username=username, msg=msg, es_warning=es_warning) # es_warning = False
+            return render_template('register_thanks.html', username=username, msg=msg, es_warning=es_warning, logged_in = bool(session['logged_in']) if 'logged_in' in session else False) # es_warning = False
         elif isinstance(can_register_user, bool) and not can_register_user:
-            return render_template('register.html', error=f"{msg}\nUsuario no registrado. Vuelve a intentarlo", es_warning=es_warning) # es_warning = True
+            return render_template('register.html', error=f"{msg}\nUsuario no registrado. Vuelve a intentarlo", es_warning=es_warning, logged_in = bool(session['logged_in']) if 'logged_in' in session else False) # es_warning = True
         else:
             con_error = can_register_user
-            return render_template('register.html', error=f"{con_error}\nUsuario no registrado. Vuelve a intentarlo", es_warning=False)
+            return render_template('register.html', error=f"{con_error}\nUsuario no registrado. Vuelve a intentarlo", es_warning=False, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
     elif request.method == 'POST':
         msg = "Por favor, rellena todos los campos"
-    return render_template('register.html', msg=msg)
+    return render_template('register.html', msg=msg, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 # Perfil de usuario
 @app.route("/profile")
 def profile():
-    return render_template('profile.html', username = session['username'], msg='Has iniciado sesión correctamente !')
+    return render_template('profile.html', username = session['username'], msg='Has iniciado sesión correctamente !', logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Gestión de notas -> CRUD
     # Create -> Crear nota
@@ -135,5 +134,5 @@ def delete_todo(id):
 # Página de error
 @app.errorhandler(404)
 def page_not_found(e):
-    return "Esta ruta no existe", 404
-    # return render_template("404.html"), 404
+    # return "Esta ruta no existe", 404
+    return render_template("404.html", msg="Esta página no existe :(", logged_in = bool(session['logged_in']) if 'logged_in' in session else False), 404

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<section id="_404" class="py-5 d-flex align-items-center">
+    <div class="col-4 mx-auto text-white">
+        <h2 class="text-center text-white">404</h2>
+        {% if msg %}
+        <div class="col bg bg-danger p-2 my-2">
+            <p class="text-white">{{ msg }}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
