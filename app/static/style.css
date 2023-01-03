@@ -166,3 +166,9 @@ footer h4, footer p{
 #mybtn1:hover, #mybtn2:hover, #mybtn3:hover {
     color: white!important;
 }
+.card-link{
+    text-decoration: underline;
+    font-weight: 500;
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+}

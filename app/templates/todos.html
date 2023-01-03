@@ -8,7 +8,15 @@
         <div class="col-4 my-2">
             <div class="card post-it my-2 mx-auto">
                 <div class="card-body">
-                    <h5 class="card-title">{{ todo[0] }} - {{ todo[1] }}</h5>
+                    <div class="row">
+                        <div class="d-flex col justify-content-end">
+                            <a href="{{ url_for('update_todo', id=todo[0]) }}" class="btn btn-warning p-1 ml-1"><img width="30" src="{{ url_for('static', filename='/img/iconos/pencil-white.png') }}"></a>
+                            <a href="{{ url_for('delete_todo', id=todo[0]) }}" class="btn btn-danger p-1 ml-1"><img width="30" src="{{ url_for('static', filename='/img/iconos/bin-white.png') }}"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h5 class="card-title my-3 mx-auto"><a class="card-link" href="{{ url_for('get_todo', id=todo[0])}} ">{{ todo[0] }} - {{ todo[1] }}</a></h5>
+                    </div>
                     <p class="card-text">Descripción: {{ todo[2] }}</p>
                     <p class="card-text">Creado: {{ todo[4] }}</p>
                     <!-- añadir edit y delete -->
