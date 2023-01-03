@@ -86,6 +86,7 @@ def register_user(db_name : str, db_table : str, username : str, email : str, pa
     finally:
         con.close()
     return (False, msg, es_warning)
+
 # Log user
 def login_user(db_name : str, db_table : str, username : str, password : str) -> tuple[int, str, str, str] | None:
     try:
@@ -100,9 +101,6 @@ def login_user(db_name : str, db_table : str, username : str, password : str) ->
     finally:
         con.close()
     return None
-# Log out user
-# def logout_user(db_name : str, db_table : str, values : list[str, str]):
-#     pass
 
 # Read from db functions
 def read_all_todos(db_name : str, db_table : str, user_id : int) -> list[tuple] | list | sql.Error:
@@ -192,59 +190,6 @@ def update_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : in
         return err
     finally:
         con.close()
-
-# def write_to_db(db_name : str, db_table : str, values : list[str, str]):
-#     # INSERT no necesita id porque es autoincremental
-#     try:
-#         con = sql.connect(db_name)
-#         if len(values) != 2:
-#             raise con.Error('Se requieren 2 valores')
-#         elif not values[0] or not values[1]:
-#             raise con.Error('No se pueden insertar valores vacíos')
-#         else:
-#             try:
-#                 db_values = f"'{values[0]}', '{values[1]}'"
-#             except TypeError as err:
-#                 return err
-#         c =  con.cursor() # cursor
-#         print(f"INSERT INTO {db_table} (Question, Answer) VALUES ({db_values})")
-#         c.execute(f"INSERT INTO {db_table} (Question, Answer) VALUES ({db_values})")
-#         con.commit() # apply changes
-#         return True
-#     except con.Error as err: # if error
-#         return err
-#     finally:
-#         con.close() # close the connection
-# # Update db functions
-# def update_db(db_name : str, db_table : str, values : list[str, str], id : int):
-#     # id es requerido
-#     is_valid_id = bool(read_from_db(db_name, db_table, ["Id"], id)) # True if id exists, False otherwise
-#     if not is_valid_id:
-#         return False
-#     else:
-#         try:
-#             con = sql.connect(db_name)
-#             c =  con.cursor() # cursor
-#             c.execute(f"UPDATE {db_table} SET Question='{values[0]}', Answer='{values[1]}' WHERE id = {id}")
-#             con.commit() # apply changes
-#             return True 
-#         except con.Error as err: # if error
-#             return err
-#         finally:
-#             con.close() # close the connection
-# # Delete from db functions
-# def delete_from_db(db_name : str, db_table : str, id : int):
-#     # Id es requerido
-#     try:
-#         con = sql.connect(db_name)
-#         c =  con.cursor()
-#         c.execute(f"DELETE FROM {db_table} WHERE id = {id}")
-#         con.commit()
-#         return True
-#     except con.Error as err:
-#         return err
-#     finally:
-#         con.close()
 
 # Delete todo
 def delete_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : int) -> tuple[bool, str] | tuple[sql.Error, None]:

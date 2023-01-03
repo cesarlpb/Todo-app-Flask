@@ -1,5 +1,4 @@
 # routes.py
-import sqlite3 as sql # -> quitar import
 from app import app
 from flask import render_template, request, session, redirect, url_for
 from utils import *
@@ -14,33 +13,6 @@ create_tables_if_not_exist(db_name, db_table, todos_table) # add validation to s
 @app.route("/")
 def index():
     return render_template("home.html", logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
-
-# Pasos:
-
-# X Crear tabla users
-
-## Registro:
-    # X Crear formulario de registro
-        # X condiciones sobre la contraseña
-            # pending pedir repetir contraseña y comprobar si son iguales
-        # X condiciones sobre el usuario - no se repite
-        # X validar email - regex
-    # X Ruta -> /register
-    # X Validar datos -> en la base de datos -> no repetir usuario
-    # X Si es correcto -> redirigir a /profile o a /login o a /
-## Login:
-    # X Crear formulario de login
-    # X Ruta -> /login
-    # X Validar datos -> en la base de datos
-        # X usar session para guardar el usuario logeado
-    # X 4. Si es correcto -> redirigir a /profile
-
-    # X Colocar logout
-
-## Una vez el usuario logea -> puede acceder a las rutas de los todos
-    # Si no ha logeado solo puede ver /, /login, /register
-
-# Conexiones a bd de SQLite3 con utils.py
 
 # Inicio de sesión o login
 @app.route("/login", methods =['GET', 'POST'])
