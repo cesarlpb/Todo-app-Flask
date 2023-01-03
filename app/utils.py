@@ -150,9 +150,20 @@ def read_todo_by_id(db_name : str, users_table : str, user_id : int, todo_id : i
     """
         Lee un todo de un usuario en la base de datos.
 
-        Args: db_name (str): bd, users_table (str): nombre de la tabla, user_id (int): id del usuario, todo_id (int): id del todo
+        Parámetros
+        ----------
+        db_name : str 
+            Base de datos. 
+        users_table : str 
+            Nombre de la tabla.
+        user_id : int 
+            Id del usuario.
+        todo_id : int 
+            Id del todo.
 
-        Returns: tuple con el todo si el usuario existe, None si no existe o SQL Error
+        Returns 
+        -------
+        Tuple con el todo si el usuario existe, None si no existe o SQL Error.
     """
     try:
         con = sql.connect(db_name)
