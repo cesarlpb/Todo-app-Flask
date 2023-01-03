@@ -129,42 +129,54 @@ def read_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : int)
     finally:
         con.close()
     
-def read_from_db(db_name : str, db_table : str, cols : list, id : int):
-    # si no recibe id, entonces devuelve todos los registros
-    # si recibe id, entonces devuelve el registro con ese id
-    try:
-        con = sql.connect(db_name)
-        c =  con.cursor()
+# def read_from_db(db_name : str, db_table : str, cols : list, id : int):
+#     # si no recibe id, entonces devuelve todos los registros
+#     # si recibe id, entonces devuelve el registro con ese id
+#     try:
+#         con = sql.connect(db_name)
+#         c =  con.cursor()
         
-        if cols == []:
-            db_cols = '*'
-        elif len(cols) <= 3:
-            valid_cols = ['id', 'question', 'answer']
-            for col in cols:
-                if col.lower() not in valid_cols:
-                    raise con.Error(f'{col} no es una columna válida')
-            db_cols = ', '.join(cols)
+#         if cols == []:
+#             db_cols = '*'
+#         elif len(cols) <= 3:
+#             valid_cols = ['id', 'question', 'answer']
+#             for col in cols:
+#                 if col.lower() not in valid_cols:
+#                     raise con.Error(f'{col} no es una columna válida')
+#             db_cols = ', '.join(cols)
         
-        if id < 1:
-            c.execute(f"SELECT {db_cols} FROM {db_table}")
-            questions = c.fetchall()
-            return questions
-        else:
-            c.execute(f"SELECT {db_cols} FROM {db_table} WHERE id = {id}")
-            question = c.fetchone()
-            return question
-    except con.Error as err: # if error
-        return err
-    finally:
-        # Todo: pasar a una función aparte para determinar dinámicamente las columnas
-        # data = c.execute(f"SELECT * FROM {db_table}")
-        # cols = []
-        # for column in data.description:
-        #     cols.append(column[0])
-        # print(cols)
-        con.close()
+#         if id < 1:
+#             c.execute(f"SELECT {db_cols} FROM {db_table}")
+#             questions = c.fetchall()
+#             return questions
+#         else:
+#             c.execute(f"SELECT {db_cols} FROM {db_table} WHERE id = {id}")
+#             question = c.fetchone()
+#             return question
+#     except con.Error as err: # if error
+#         return err
+#     finally:
+#         # Todo: pasar a una función aparte para determinar dinámicamente las columnas
+#         # data = c.execute(f"SELECT * FROM {db_table}")
+#         # cols = []
+#         # for column in data.description:
+#         #     cols.append(column[0])
+#         # print(cols)
+#         con.close()
 
 # Write to db functions
+    # create todo
+def create_new_todo(db_name : str, db_table : str, user_id : int, values : list) -> tuple[bool, str] | tuple[sql.Error, None]:
+    try:
+        con = sql.connect(db_name)
+        c = con.cursor()
+        c.execute(f"INSERT INTO {db_table} (Title, Description, Done, UserId) VALUES (?, ?, ?, ?)", (values[0], values[1], values[2], user_id))
+        con.commit()
+        return (True, 'Todo creado correctamente')
+    except con.Error as err:
+        return err
+    finally:
+        con.close()
 def write_to_db(db_name : str, db_table : str, values : list[str, str]):
     # INSERT no necesita id porque es autoincremental
     try:

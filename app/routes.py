@@ -122,7 +122,15 @@ def get_todo(id):
 # Debe estar logeado -> ruta para crear una nota
 @app.route("/create", methods=["GET", "POST"])
 def create_todo():
-    return "Create"
+    if request.method == 'GET':
+        return render_template('create_todo.html', logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
+    elif request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        done = 0 # 0 = Pendiente, 1 = Hecho/Completado
+        can_create_todo, msg = create_new_todo(db_name, todos_table, session['id'], [title, description, done]) 
+        # Validar si se ha creado la nota con can_create_todo
+        return render_template('create_thanks.html', msg=msg, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Debe estar logeado -> ruta para actualizar una nota
 @app.route("/update/<int:id>", methods=["GET", "PUT"])

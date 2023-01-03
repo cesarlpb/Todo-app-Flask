@@ -142,7 +142,7 @@ h3 {
     padding-top: 0;
     border-top: 1px solid white;
 }
-#login, #register, #profile, #_404, #todos {
+#login, #register, #profile, #_404, #todos, #create_thanks, #create_todo {
     height: 100vh;
     background-image: linear-gradient(to right, #0FDBDB, #0875D8);
 }
@@ -167,7 +167,8 @@ footer h4, footer p{
 .my-btn {
     width: 150px;
 }
-#mybtn1:hover, #mybtn2:hover, #mybtn3:hover {
+/* REVISAR */
+#mybtn1:hover, #mybtn2:hover, #mybtn3:hover, #mybtn4:hover {
     color: white!important;
 }
 .card-link{

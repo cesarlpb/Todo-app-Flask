@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<section id="create_todo" class="py-5 d-flex align-items-center">
+    <div class="col-6 mx-auto">
+        <h2 class="text-white col-10 text-center">Crear Nota</h2>
+        <div class="container col-10 mx-auto justify-content-center">
+            <form action="{{ url_for('create_todo') }}" method="post">
+                <div class="form-group">
+                    <label for="title">Título</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Título">
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Descripción">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary mx-auto">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
