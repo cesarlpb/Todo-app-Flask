@@ -177,6 +177,22 @@ def create_new_todo(db_name : str, db_table : str, user_id : int, values : list)
         return err
     finally:
         con.close()
+
+# Update todo
+def update_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : int, values : list) -> tuple[bool, str] | tuple[sql.Error, None]:
+    try:
+        con = sql.connect(db_name)
+        c = con.cursor()
+        # print(f"UPDATE {db_table} SET Title = {values[0]}, Description = {values[1]}, Done = {values[2]} WHERE Id = {todo_id} AND UserId = {user_id}")
+        # c.execute(f"UPDATE {db_table} SET Title = ?, Description = ?, Done = ? WHERE Id = ? AND UserId = ?", (values[0], values[1], values[2], todo_id, user_id))
+        c.execute(f"UPDATE {db_table} SET Title = {values[0]}, Description = {values[1]}, Done = {values[2]} WHERE Id = {todo_id} AND UserId = {user_id}")
+        con.commit()
+        return (True, f'Todo {todo_id} actualizado correctamente')
+    except con.Error as err:
+        return err
+    finally:
+        con.close()
+
 def write_to_db(db_name : str, db_table : str, values : list[str, str]):
     # INSERT no necesita id porque es autoincremental
     try:

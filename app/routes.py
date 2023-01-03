@@ -133,9 +133,24 @@ def create_todo():
         return render_template('create_thanks.html', msg=msg, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Debe estar logeado -> ruta para actualizar una nota
-@app.route("/update/<int:id>", methods=["GET", "PUT"])
+@app.route("/update/<int:id>", methods=["GET", "POST"])
 def update_todo(id):
-    return f"Update {id}"
+    if request.method == 'GET':
+        todo = read_todo_by_id(db_name, todos_table,  session['id'], id)
+        return render_template('update_todo.html', todo=todo, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
+    elif request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        if 'done' in request.form and request.form['done']:
+            done = int(request.form['done']) # 0 = Pendiente, 1 = Hecho/Completado
+        else:
+            done = 0
+        can_update_todo, msg = update_todo_by_id(db_name, todos_table, session['id'], id, [title, description, done])
+        # Validar si se ha actualizado la nota con can_update_todo
+        if can_update_todo:
+            return render_template('update_thanks.html', msg=msg, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
+        else:
+            return f"error: {can_update_todo}"
 
 # Debe estar logeado -> ruta para eliminar una nota
 @app.route("/delete/<int:id>", methods=["GET", "DELETE"])

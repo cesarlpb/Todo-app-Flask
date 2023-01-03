@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<section id="create_thanks" class="py-5 d-flex align-items-center">
+    <div class="col-4 mx-auto text-white">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-center text-white">Nota actualizada</h2>
+                <div class="col bg bg-success p-2 my-2">
+                    <p class="text-center text-white">{{ msg }}</p>
+                </div>
+                <a class="btn btn-primary d-inline-block mx-auto" href="{{url_for('get_all_todos')}}">Ver Notas</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
