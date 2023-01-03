@@ -142,7 +142,9 @@ h3 {
     padding-top: 0;
     border-top: 1px solid white;
 }
-#login, #register, #profile, #_404, #todos, #create_thanks, #create_todo {
+#login, #register, #profile, #_404, #todos, 
+#create_thanks, #create_todo,
+#delete_thanks, #update_thanks {
     height: 100vh;
     background-image: linear-gradient(to right, #0FDBDB, #0875D8);
 }

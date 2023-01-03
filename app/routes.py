@@ -153,9 +153,13 @@ def update_todo(id):
             return f"error: {can_update_todo}"
 
 # Debe estar logeado -> ruta para eliminar una nota
-@app.route("/delete/<int:id>", methods=["GET", "DELETE"])
+@app.route("/delete/<int:id>", methods=["GET"])
 def delete_todo(id):
-    return f"Delete {id}"
+    if request.method == 'GET':
+        can_delete_todo, msg = delete_todo_by_id(db_name, todos_table, session['id'], id)
+        # Validar si se ha eliminado la nota con can_delete_todo
+        if can_delete_todo:
+            return render_template('delete_thanks.html', id=id, msg=msg, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Página de error
 @app.errorhandler(404)
