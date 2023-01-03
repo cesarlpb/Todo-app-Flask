@@ -467,3 +467,7 @@ wsl --export Ubuntu-22.04 nombre_del_backup.tar
 Importar:
 
 *pendiente*
+
+## Notas finales
+
+- Eliminamos los archivos `test_*` de la app de preguntas. [App de Preguntas](https://github.com/cesarlpb/CRUD-SQLite3/tree/refactor) está en su repositorio.
