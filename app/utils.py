@@ -39,7 +39,6 @@ def create_tables_if_not_exist(db_name : str, db_table : str, todos_table : str)
                 c.execute(f"INSERT INTO todos (Title, Description, Done, DueDate, UserId) VALUES ('title1', 'description1', 0, '{due_date}', {user_id[0]})")
                 # c.execute(f"INSERT INTO todos (Title, Description, Done, DueDate, UserId) VALUES ('title2', 'description2', 0, '{due_date}', {user_id[0]})")
                 # c.execute(f"INSERT INTO todos (Title, Description, Done, DueDate, UserId) VALUES ('title3', 'description3', 0, '{due_date}', {user_id[0]})")
-            # todo: hay que limitar la inserción de datos para que solo haya cierta cantidad de todos... 5-10 todos por usuario
         con.commit()
         return True
     except con.Error as err:
@@ -161,8 +160,7 @@ def update_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : in
     try:
         con = sql.connect(db_name)
         c = con.cursor()
-        # print(f"UPDATE {db_table} SET Title = {values[0]}, Description = {values[1]}, Done = {values[2]} WHERE Id = {todo_id} AND UserId = {user_id}")
-        # c.execute(f"UPDATE {db_table} SET Title = ?, Description = ?, Done = ? WHERE Id = ? AND UserId = ?", (values[0], values[1], values[2], todo_id, user_id))
+        # revisar
         c.execute(f"UPDATE {db_table} SET Title = {values[0]}, Description = {values[1]}, Done = {values[2]} WHERE Id = {todo_id} AND UserId = {user_id}")
         con.commit()
         return (True, f'Todo {todo_id} actualizado correctamente')
