@@ -105,10 +105,12 @@ h3 {
     padding: 10px;
     margin: 10px;
     width: 300px;
-    height: 250px;
+    height: 250px; /* revisar: fijo implica que con más contenido no crece */
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-
+.post-it-large{
+    height: unset;
+}
 /* Sección Home */
 
 #home{
