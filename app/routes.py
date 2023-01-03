@@ -6,9 +6,9 @@ from utils import *
 app.secret_key = 'your secret key' 
 
 db_name = 'todo.db'
-db_table = 'users'
+users_table = 'users'
 todos_table = 'todos'
-create_tables_if_not_exist(db_name, db_table, todos_table) # add validation to show error if table not created
+create_tables_if_not_exist(db_name, users_table, todos_table) # add validation to show error if table not created
 # Página de inicio o landing page
 @app.route("/")
 def index():
@@ -23,7 +23,7 @@ def login():
     elif request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
-        account = login_user(db_name, db_table, username, password) # (1, 'test@test.test', '12345', 'test1') o None
+        account = login_user(db_name, users_table, username, password) # (1, 'test@test.test', '12345', 'test1') o None
         if account:
             session['logged_in'] = True
             session['id'] = account[0] # id
@@ -55,7 +55,7 @@ def register():
         # password2 = request.form['password2']
 
         # store in database
-        can_register_user, msg, es_warning = register_user(db_name, db_table, username, email, password)
+        can_register_user, msg, es_warning = register_user(db_name, users_table, username, email, password)
         # revisar
         if isinstance(can_register_user, bool) and can_register_user:
             return render_template('register_thanks.html', username=username, msg=msg, es_warning=es_warning, logged_in = bool(session['logged_in']) if 'logged_in' in session else False) # es_warning = False
@@ -95,7 +95,11 @@ def get_todo(id):
 @app.route("/create", methods=["GET", "POST"])
 def create_todo():
     if request.method == 'GET':
-        return render_template('create_todo.html', logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
+        if 'logged_in' in session and session['logged_in']:
+            return render_template('create_todo.html', logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
+        else:
+            # Añadir mensaje de error -> debes iniciar sesión para crear una nota
+            return redirect(url_for('login'))
     elif request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
