@@ -26,6 +26,11 @@ def create_tables_if_not_exist(db_name : str, db_table : str, todos_table : str)
             FOREIGN KEY(UserId) REFERENCES users(Id)
             )""")
 
+        #  Ejercicio:
+        # Revisar query de crear tabla todos
+        # Limitar notas que se agregan a cada usuario a máximo 6
+        # Insert de al menos 1 usuario y 1 nota...
+
         # c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title11', 'description11', 0, 1)")
         
         # c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title21', 'description21', 0, 2)")

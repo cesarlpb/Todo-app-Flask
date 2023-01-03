@@ -17,7 +17,7 @@ def index():
 # Inicio de sesión o login
 @app.route("/login", methods =['GET', 'POST'])
 def login():
-    msg = ""
+    # msg = ""
     if request.method == 'GET':
         return render_template("login.html", logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
     elif request.method == 'POST' and 'username' in request.form and 'password' in request.form:
@@ -28,8 +28,7 @@ def login():
             session['logged_in'] = True
             session['id'] = account[0] # id
             session['username'] = account[-1] # username
-            return redirect(url_for('profile', username = session['username']))
-            # return render_template('profile.html', msg = msg, username = session['username'])
+            return redirect(url_for('profile', username = session['username'])) # Todo: añadir opciones para editar perfil de usuario (Ejercicio)
         else:
             error = 'Hay algún dato incorrecto. Vuelve a intentarlo.'
     return render_template("login.html", error=error, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
@@ -71,6 +70,7 @@ def register():
 # Perfil de usuario
 @app.route("/profile")
 def profile():
+    # Ejericio: añadir opciones para editar perfil de usuario
     return render_template('profile.html', username = session['username'], msg='Has iniciado sesión correctamente !', logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Gestión de notas -> CRUD
