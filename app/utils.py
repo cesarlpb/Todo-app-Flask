@@ -40,6 +40,7 @@ def create_tables_if_not_exist(db_name : str, db_table : str, todos_table : str)
     finally:
         con.close()
 
+# User
 # Register new user
 def register_user(db_name : str, db_table : str, username : str, email : str, password : str) -> tuple[bool, str, bool] | tuple[sql.Error, None, bool]:
     """
@@ -102,7 +103,9 @@ def login_user(db_name : str, db_table : str, username : str, password : str) ->
         con.close()
     return None
 
-# Read from db functions
+# Todos / Notas
+# READ
+# Read all todos
 def read_all_todos(db_name : str, db_table : str, user_id : int) -> list[tuple] | list | sql.Error:
     try:
         con = sql.connect(db_name)
@@ -115,6 +118,7 @@ def read_all_todos(db_name : str, db_table : str, user_id : int) -> list[tuple] 
     except con.Error as err:
         return err
 
+# Read todo by id
 def read_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : int) -> tuple | None | sql.Error:
     try:
         con = sql.connect(db_name)
@@ -126,44 +130,9 @@ def read_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : int)
         return err
     finally:
         con.close()
-    
-# def read_from_db(db_name : str, db_table : str, cols : list, id : int):
-#     # si no recibe id, entonces devuelve todos los registros
-#     # si recibe id, entonces devuelve el registro con ese id
-#     try:
-#         con = sql.connect(db_name)
-#         c =  con.cursor()
-        
-#         if cols == []:
-#             db_cols = '*'
-#         elif len(cols) <= 3:
-#             valid_cols = ['id', 'question', 'answer']
-#             for col in cols:
-#                 if col.lower() not in valid_cols:
-#                     raise con.Error(f'{col} no es una columna válida')
-#             db_cols = ', '.join(cols)
-        
-#         if id < 1:
-#             c.execute(f"SELECT {db_cols} FROM {db_table}")
-#             questions = c.fetchall()
-#             return questions
-#         else:
-#             c.execute(f"SELECT {db_cols} FROM {db_table} WHERE id = {id}")
-#             question = c.fetchone()
-#             return question
-#     except con.Error as err: # if error
-#         return err
-#     finally:
-#         # Todo: pasar a una función aparte para determinar dinámicamente las columnas
-#         # data = c.execute(f"SELECT * FROM {db_table}")
-#         # cols = []
-#         # for column in data.description:
-#         #     cols.append(column[0])
-#         # print(cols)
-#         con.close()
 
-# Write to db functions
-    # create todo
+# WRITE
+# Create new todo
 def create_new_todo(db_name : str, db_table : str, user_id : int, values : list) -> tuple[bool, str] | tuple[sql.Error, None]:
     try:
         con = sql.connect(db_name)
@@ -191,6 +160,7 @@ def update_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : in
     finally:
         con.close()
 
+# DELETE
 # Delete todo
 def delete_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : int) -> tuple[bool, str] | tuple[sql.Error, None]:
     try:
