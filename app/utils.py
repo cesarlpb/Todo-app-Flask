@@ -26,9 +26,12 @@ def create_tables_if_not_exist(db_name : str, db_table : str, todos_table : str)
             FOREIGN KEY(UserId) REFERENCES users(Id)
             )""")
 
-        c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title11', 'description11', 0, 1)")
-        c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title21', 'description21', 0, 1)")
-        c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title31', 'description31', 0, 1)")
+        # c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title11', 'description11', 0, 1)")
+        
+        # c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title21', 'description21', 0, 2)")
+        # c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title31', 'description31', 0, 3)")
+            # todo: hay que limitar la inserción de datos para que solo haya cierta cantidad de todos... 5-10 todos por usuario
+
         # c.execute(f"CREATE TABLE IF NOT EXISTS {todos_table} (Id INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, Description TEXT, Done INTEGER, CreateAt DEFAULT CURRENT_TIMESTAMP, ModifiedAt DEFAULT CURRENT_TIMESTAMP, DueDate DATETIME DEFAULT DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 DAY), UserId INTEGER, FOREIGN KEY(UserId) REFERENCES {db_table}(Id))")
         con.commit()
         return True
@@ -102,15 +105,15 @@ def login_user(db_name : str, db_table : str, username : str, password : str) ->
 #     pass
 
 # Read from db functions
-def read_all_todos(db_name : str, db_table : str, user_id : int) -> list[tuple] | None | sql.Error:
+def read_all_todos(db_name : str, db_table : str, user_id : int) -> list[tuple] | list | sql.Error:
     try:
         con = sql.connect(db_name)
         c = con.cursor()
-        c.execute(f"SELECT * FROM {db_table} WHERE Id = {user_id}")
+        c.execute(f"SELECT * FROM {db_table} WHERE UserId = {user_id}")
         todos = c.fetchall() # lista o []
         if todos:
             return todos
-        return None # revisar -> anotación lista []
+        return [] # Si no hay todos, entonces devuelve una lista vacía
     except con.Error as err:
         return err
 def read_from_db(db_name : str, db_table : str, cols : list, id : int):

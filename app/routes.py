@@ -111,8 +111,6 @@ def profile():
 @app.route("/todos")
 def get_all_todos():
     todos = read_all_todos(db_name, todos_table, session['id'])
-    for todo in todos:
-        print(todo)  # revisar por qué sale solo uno en ruta ver mis notas
     return render_template('todos.html', todos=todos, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Debe estar logeado -> ruta para ver UNA nota del usuario

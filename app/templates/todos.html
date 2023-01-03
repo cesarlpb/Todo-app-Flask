@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
 {% block main %}
+<section id="todos" class="py-5">
+    <h2 class="text-white text-center my-5">Mis Notas</h2>
+    <div class="row col-10 justify-content-center align-items-center mx-auto">
     {% for todo in todos %}
-        <div class="col-4 mx-auto">
-            <div class="card post-it my-2">
+        <div class="col-4 my-2">
+            <div class="card post-it my-2 mx-auto">
                 <div class="card-body">
                     <h5 class="card-title">{{ todo[0] }} - {{ todo[1] }}</h5>
                     <p class="card-text">Descripción: {{ todo[2] }}</p>
@@ -13,6 +16,8 @@
             </div>
         </div>
     {% endfor %}
+    </div>
+</section>
 {% endblock %}
 
 <!-- <a href="{{ url_for('update_todo', todo_id=todo.id) }}" class="btn btn-warning">Editar nota</a>
