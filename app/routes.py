@@ -102,7 +102,8 @@ def create_todo():
         done = 0 # 0 = Pendiente, 1 = Hecho/Completado
         can_create_todo, msg = create_new_todo(db_name, todos_table, session['id'], [title, description, done]) 
         # Validar si se ha creado la nota con can_create_todo
-        return render_template('create_thanks.html', msg=msg, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
+        if can_create_todo:
+            return render_template('create_thanks.html', msg=msg, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Debe estar logeado -> ruta para actualizar una nota
 @app.route("/update/<int:id>", methods=["GET", "POST"])

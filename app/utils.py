@@ -1,6 +1,7 @@
 #%% utils.py
 import sqlite3 as sql
 import re
+from datetime import datetime, timedelta
 
 # Create table if not exist
 def create_tables_if_not_exist(db_name : str, db_table : str, todos_table : str) -> bool | sql.Error:
@@ -9,35 +10,36 @@ def create_tables_if_not_exist(db_name : str, db_table : str, todos_table : str)
         c = con.cursor()
         # Start a transaction
         c.execute('BEGIN')
+        # Tabla users
         c.execute(f"CREATE TABLE IF NOT EXISTS {db_table} (Id INTEGER PRIMARY KEY AUTOINCREMENT, Email TEXT, Password TEXT, Username TEXT)")
-        # c.execute(f"CREATE TABLE IF NOT EXISTS {todos_table} (Id INTEGER PRIMARY KEY AUTOINCREMENT,Title TEXT,Description TEXT,Done INTEGER,CreateAt DATETIME DEFAULT CURRENT_TIMESTAMP,ModifiedAt DATETIME DEFAULT CURRENT_TIMESTAMP,DueDate DATETIME DEFAULT CURRENT_TIMESTAMP,UserId INTEGER,FOREIGN KEY(UserId) REFERENCES {db_table}(Id)")
-        
-        # revisar - DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
-
-        c.execute("""CREATE TABLE IF NOT EXISTS todos (
+        # Tabla todos
+        c.execute(f"""CREATE TABLE IF NOT EXISTS {todos_table} (
             Id INTEGER PRIMARY KEY AUTOINCREMENT,
             Title TEXT,
             Description TEXT,
             Done INTEGER,
             CreateAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             ModifiedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-            DueDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+            DueDate DATETIME DEFAULT NULL,
             UserId INTEGER,
-            FOREIGN KEY(UserId) REFERENCES users(Id)
+            FOREIGN KEY(UserId) REFERENCES {db_table}(Id)
             )""")
-
-        #  Ejercicio:
-        # Revisar query de crear tabla todos
-        # Limitar notas que se agregan a cada usuario a máximo 6
-        # Insert de al menos 1 usuario y 1 nota...
-
-        # c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title11', 'description11', 0, 1)")
         
-        # c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title21', 'description21', 0, 2)")
-        # c.execute("INSERT INTO todos (Title, Description, Done, UserId) VALUES ('title31', 'description31', 0, 3)")
+        # Usamos la función get_timestamp para obtener la fecha actual + 7 días
+        due_date = get_timestamp(7)
+        # Conseguir lista de ids de usuarios
+        c.execute(f"SELECT Id FROM {db_table}")
+        users = c.fetchall()
+        for user_id in users:
+            # Limitamos notas a insertar
+            c.execute(f"SELECT COUNT(*) FROM {todos_table} WHERE UserId = {user_id[0]}")
+            todos_number = c.fetchone()[0]
+            # Insertar 3 notas por cada usuario
+            if todos_number < 3:
+                c.execute(f"INSERT INTO todos (Title, Description, Done, DueDate, UserId) VALUES ('title1', 'description1', 0, '{due_date}', {user_id[0]})")
+                # c.execute(f"INSERT INTO todos (Title, Description, Done, DueDate, UserId) VALUES ('title2', 'description2', 0, '{due_date}', {user_id[0]})")
+                # c.execute(f"INSERT INTO todos (Title, Description, Done, DueDate, UserId) VALUES ('title3', 'description3', 0, '{due_date}', {user_id[0]})")
             # todo: hay que limitar la inserción de datos para que solo haya cierta cantidad de todos... 5-10 todos por usuario
-
-        # c.execute(f"CREATE TABLE IF NOT EXISTS {todos_table} (Id INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, Description TEXT, Done INTEGER, CreateAt DEFAULT CURRENT_TIMESTAMP, ModifiedAt DEFAULT CURRENT_TIMESTAMP, DueDate DATETIME DEFAULT DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 DAY), UserId INTEGER, FOREIGN KEY(UserId) REFERENCES {db_table}(Id))")
         con.commit()
         return True
     except con.Error as err:
@@ -142,7 +144,11 @@ def create_new_todo(db_name : str, db_table : str, user_id : int, values : list)
     try:
         con = sql.connect(db_name)
         c = con.cursor()
-        c.execute(f"INSERT INTO {db_table} (Title, Description, Done, UserId) VALUES (?, ?, ?, ?)", (values[0], values[1], values[2], user_id))
+        
+        # Usamos la función get_timestamp para obtener la fecha actual + 7 días
+        due_date = get_timestamp(7)
+
+        c.execute(f"INSERT INTO {db_table} (Title, Description, Done, DueDate, UserId) VALUES (?, ?, ?, ?, ?)", (values[0], values[1], values[2], due_date,user_id))
         con.commit()
         return (True, 'Todo creado correctamente')
     except con.Error as err:
@@ -178,3 +184,10 @@ def delete_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : in
         return err
     finally:
         con.close()
+
+def get_timestamp(dias : int) -> str:
+    timestamp = datetime.now().timestamp()
+    dt = datetime.fromtimestamp(timestamp)
+    dt = dt + timedelta(days=dias)
+    due_date = dt.strftime('%Y-%m-%d %H:%M:%S')
+    return due_date
