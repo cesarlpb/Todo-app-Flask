@@ -116,7 +116,8 @@ def get_all_todos():
 # Debe estar logeado -> ruta para ver UNA nota del usuario
 @app.route("/todos/<int:id>")
 def get_todo(id):
-    return f"Todo {id}"
+    todo = read_todo_by_id(db_name, todos_table,  session['id'], id)
+    return render_template('todo.html', todo=todo, logged_in = bool(session['logged_in']) if 'logged_in' in session else False)
 
 # Debe estar logeado -> ruta para crear una nota
 @app.route("/create", methods=["GET", "POST"])

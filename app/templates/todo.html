@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<section id="todos" class="py-5">
+    <h2 class="text-white text-center my-5">Nota - {{ todo[0] }}</h2>
+    <div class="d-flex col-10 justify-content-center align-items-center mx-auto">
+        <div class="col-4 my-2">
+            <div class="card post-it post-it-large my-2 mx-auto">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="d-flex col justify-content-end">
+                            <a href="{{ url_for('update_todo', id=todo[0]) }}" class="btn btn-warning p-1 ml-1"><img width="30" src="{{ url_for('static', filename='/img/iconos/pencil-white.png') }}"></a>
+                            <a href="{{ url_for('delete_todo', id=todo[0]) }}" class="btn btn-danger p-1 ml-1"><img width="30" src="{{ url_for('static', filename='/img/iconos/bin-white.png') }}"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h5 class="card-title my-3 mx-auto"><a class="card-link" href="{{ url_for('get_todo', id=todo[0])}} ">{{ todo[0] }} - {{ todo[1] }}</a></h5>
+                    </div>
+                    <div class="container">
+                        <p class="card-text">Descripción: {{ todo[2] }}</p>
+                        <p class="card-text">Creado: {{ todo[4] }}</p>
+                        <p class="card-text">Actualizado: {{ todo[5] }}</p>
+                        <p class="card-text">Estado: {% if todo[3] == 0 %} Pendiente {% else %} Completado {% endif %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

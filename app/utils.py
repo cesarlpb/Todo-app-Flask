@@ -116,6 +116,19 @@ def read_all_todos(db_name : str, db_table : str, user_id : int) -> list[tuple] 
         return [] # Si no hay todos, entonces devuelve una lista vacía
     except con.Error as err:
         return err
+
+def read_todo_by_id(db_name : str, db_table : str, user_id : int, todo_id : int) -> tuple | None | sql.Error:
+    try:
+        con = sql.connect(db_name)
+        c = con.cursor()
+        c.execute(f"SELECT * FROM {db_table} WHERE UserId = {user_id} AND Id = {todo_id}")
+        todo = c.fetchone() # tuple o None
+        return todo
+    except con.Error as err:
+        return err
+    finally:
+        con.close()
+    
 def read_from_db(db_name : str, db_table : str, cols : list, id : int):
     # si no recibe id, entonces devuelve todos los registros
     # si recibe id, entonces devuelve el registro con ese id
